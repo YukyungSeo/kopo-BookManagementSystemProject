@@ -1,27 +1,19 @@
 package kr.ac.kopo.inMemory.da;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BorrowDA implements MapDA<String, String> {
 
-	private Map<String, String> borrowMap;
+	private final static Map<String, String> borrowMap = new HashMap<>();
 
 	public BorrowDA() {
 		super();
 	}
 
-	public BorrowDA(Map<String, String> borrowMap) {
-		super();
-		this.borrowMap = borrowMap;
-	}
-
 	public Map<String, String> getBorrowMap() {
 		return borrowMap;
-	}
-
-	public void setBorrowMap(Map<String, String> borrowMap) {
-		this.borrowMap = borrowMap;
 	}
 
 	@Override

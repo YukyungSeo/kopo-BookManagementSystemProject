@@ -3,6 +3,7 @@ package kr.ac.kopo.inMemory.controller;
 import kr.ac.kopo.inMemory.model.Manager;
 import kr.ac.kopo.inMemory.model.Member;
 import kr.ac.kopo.inMemory.model.User;
+import kr.ac.kopo.inMemory.service.UserService;
 
 public class AccountMenuController implements MenuController {
 
@@ -19,7 +20,10 @@ public class AccountMenuController implements MenuController {
 			selection = IO.getInt("항목을 선택하세요(1.회원가입 2.로그인 3.종료) : ");
 			switch (selection) {
 			case 1:
-				join();
+				if (join())
+					IO.println("회원가입이 완료되었습니다");
+				else
+					IO.print("오류가 발생되었습니다");
 				break;
 			case 2:
 				login();
@@ -34,84 +38,72 @@ public class AccountMenuController implements MenuController {
 		}
 	}
 
-	private void join() {
-		// TODO Auto-generated method stub
+	private boolean join() {
+		UserService us = new UserService();
 
+		String id = this.getId(us);
+		String pwd = IO.getString("패스워드 : ");
+		String name = IO.getString("이름 : ");
+		String birth = IO.getString("생년월일(ex.1990.01.01) : ");
+		String email = IO.getString("이메일 : ");
+		String phoneNumber = IO.getString("전화번호 : ");
+
+		User user;
+		// TODO 입력한 값이 null일 경우 예외처리
 		char c = IO.getChar("관리자인가요?(y/n) : ");
 		if (c == 'y' || c == 'Y') {
-			User manager = new Manager();
-
-			manager.setId(this.getId());
-			manager.setPassword(IO.getString("패스워드 : "));
-			manager.setName(IO.getString("이름 : "));
-			// TODO::아래 3항목은 제대로 된 형식인지 확인
-			manager.setBirth(IO.getString("생년월일(ex.1990.01.01) : "));
-			manager.setEmail(IO.getString("이메일 : "));
-			manager.setPhoneNumber(IO.getString("전화번호 : "));
-
-			// TODO::관리자 승인 대기 목록에 추가해야함
-			MenuController.USERSERVICE.add(manager);
+			user = new Manager(id, pwd, name, birth, email, phoneNumber);
 		} else {
-			User member = new Member();
-			member.setId(this.getId());
-			member.setPassword(IO.getString("패스워드 : "));
-			member.setName(IO.getString("이름 : "));
-			// TODO::아래 3항목은 제대로 된 형식인지 확인
-			member.setBirth(IO.getString("생년월일(ex.1990.01.01) : "));
-			member.setEmail(IO.getString("이메일 : "));
-			member.setPhoneNumber(IO.getString("전화번호 : "));
-
-			MenuController.USERSERVICE.add(member);
+			user = new Member(id, pwd, name, birth, email, phoneNumber);
 		}
 
+		return us.join(user);
 	}
 
-	private String getId() {
+	private String getId(UserService us) {
 		String id = null;
 		while (true) {
 			id = IO.getString("아이디 : ");
 
-			User user = USERSERVICE.getAccount(id);
-			if (user == null) {
+			if (!us.containID(id))
 				break;
-			} else {
-				IO.println("해당 아이디는 이미 존재합니다. 다시 입력해주세요.");
-			}
+
+			IO.println("해당 아이디는 이미 존재합니다. 다시 입력해주세요.");
 		}
 		return id;
 	}
 
 	private void login() {
 		// TODO Auto-generated method stub
-		String id = IO.getString("아이디 : ");
+//		String id = IO.getString("아이디 : ");
+//
+//		User user = null;
+//		if (user == null) {
+//			IO.println("입력하신 정보가 맞지 않습니다.");
+//			return;
+//		}
+//
+//		String pwd = IO.getString("패스워드 : ");
+//		if (!user.getPassword().equals(pwd)) {
+//			IO.println("입력정보가 맞지 않습니다.");
+//			return;
+//		}
+//
+//		if (user instanceof Manager) {
+//			char c = IO.getChar("관리자입니다. 항목을 선택하세요(1.관리자메뉴 2.회원메뉴) : ");
+//			switch (c) {
+//			case 1:
+////				ManagerMenuController managerMC = new ManagerMenuController((Manager)user);
+//				break;
+//			case 2:
+//				// TODO:: 수정
+////				MemberMenuController memeberMC = new MemberMenuController((Member)user);
+//			default:
+//				IO.println("항목이 존재하지 않습니다.");
+//				break;
+//			}
+//		}
 
-		User user = USERSERVICE.getAccount(id);
-		if (user == null) {
-			IO.println("입력하신 정보가 맞지 않습니다.");
-			return;
-		} 
-		
-		String pwd = IO.getString("패스워드 : ");
-		if(!user.getPassword().equals(pwd)){
-			IO.println("입력정보가 맞지 않습니다.");
-			return;
-		}
-
-		if(user instanceof Manager) {
-			char c = IO.getChar("관리자입니다. 항목을 선택하세요(1.관리자메뉴 2.회원메뉴) : ");
-			switch (c) {
-			case 1:
-//				ManagerMenuController managerMC = new ManagerMenuController((Manager)user);
-				break;
-			case 2:
-				// TODO:: 수정
-//				MemberMenuController memeberMC = new MemberMenuController((Member)user);
-			default:
-				IO.println("항목이 존재하지 않습니다.");
-				break;
-			}
-		}
-		
 	}
 
 }

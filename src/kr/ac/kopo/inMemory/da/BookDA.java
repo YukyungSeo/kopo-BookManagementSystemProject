@@ -1,13 +1,14 @@
 package kr.ac.kopo.inMemory.da;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import kr.ac.kopo.inMemory.model.Book;
 
 public class BookDA implements MapDA<String, Book> {
 
-	private Map<String, Book> bookMap;
+	private final static Map<String, Book> bookMap = new HashMap<>();
 
 	public BookDA() {
 		super();
@@ -15,16 +16,12 @@ public class BookDA implements MapDA<String, Book> {
 
 	public BookDA(Map<String, Book> bookMap) {
 		super();
-		this.bookMap = bookMap;
 	}
 
 	public Map<String, Book> getBookMap() {
 		return bookMap;
 	}
 
-	public void setBookMap(Map<String, Book> bookMap) {
-		this.bookMap = bookMap;
-	}
 
 	@Override
 	public boolean add(String k, Book v) {

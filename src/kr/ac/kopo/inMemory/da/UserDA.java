@@ -6,32 +6,21 @@ import java.util.Map;
 
 import kr.ac.kopo.inMemory.model.User;
 
-public class AccountDA implements MapDA<String, User> {
+public class UserDA implements MapDA<String, User> {
 
-	private Map<String, User> accountMap;
+	private final static Map<String, User> accountMap = new HashMap<>();
 
-	public AccountDA() {
+	public UserDA() {
 		super();
-		this.accountMap = new HashMap<>();
-	}
-
-	public AccountDA(Map<String, User> accountMap) {
-		super();
-		this.accountMap = accountMap;
 	}
 
 	public Map<String, User> getAccountMap() {
 		return accountMap;
 	}
 
-	public void setAccountMap(Map<String, User> accountMap) {
-		this.accountMap = accountMap;
-	}
-
 	@Override
 	public boolean add(String k, User v) {
-		// TODO Auto-generated method stub
-		return false;
+		return accountMap.put(k, v) == null;
 	}
 
 	@Override

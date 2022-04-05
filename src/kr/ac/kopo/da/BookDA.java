@@ -22,23 +22,19 @@ public class BookDA implements MapDA<String, Book> {
 		return bookMap;
 	}
 
-
 	@Override
 	public boolean add(String k, Book v) {
-		// TODO Auto-generated method stub
-		return false;
+		return bookMap.put(k, v) == null;
 	}
 
 	@Override
 	public Book remove(String k) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookMap.remove(k);
 	}
 
 	@Override
 	public Book get(String k) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookMap.get(k);
 	}
 
 	@Override

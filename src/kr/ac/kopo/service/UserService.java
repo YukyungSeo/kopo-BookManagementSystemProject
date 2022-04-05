@@ -22,19 +22,7 @@ public class UserService {
 	}
 
 	public boolean containID(String id) {
-		// TODO Auto-generated method stub
-		UserDA uda = new UserDA();
-		return uda.get(id) != null;
-	}
-
-	public boolean login(User e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean logout(User e) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.get(id) != null;
 	}
 
 	public User remove(User e) {
@@ -48,21 +36,17 @@ public class UserService {
 
 	public ArrayList<User> search(String value) {
 		ArrayList<User> arr = new ArrayList<User>();
-		
+
 		UserDA uda = new UserDA();
 		Set<Entry<String, User>> set = uda.getAccountMap().entrySet();
 		for (Entry<String, User> entry : set) {
 			User user = entry.getValue();
-			if(user.getId().contains(value) || user.getName().contains(value)) {
+			if (user.getId().contains(value) || user.getName().contains(value) || user.getBirth().contains(value)
+					|| user.getEmail().contains(value) || user.getPhoneNumber().contains(value)) {
 				arr.add(user);
 			}
 		}
 		return arr;
-	}
-
-	public User get(User e) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public User get(String id) {

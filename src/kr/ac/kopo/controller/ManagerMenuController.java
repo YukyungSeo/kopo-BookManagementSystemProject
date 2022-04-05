@@ -4,7 +4,7 @@ import kr.ac.kopo.model.Manager;
 
 public class ManagerMenuController extends UserMenuController {
 
-	Manager manager;
+	private Manager manager;
 
 	public ManagerMenuController() {
 		super();

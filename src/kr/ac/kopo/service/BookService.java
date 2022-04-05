@@ -1,9 +1,9 @@
-package kr.ac.kopo.inMemory.service;
+package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.inMemory.model.Book;
-import kr.ac.kopo.inMemory.model.User;
+import kr.ac.kopo.model.Book;
+import kr.ac.kopo.model.User;
 
 public class BookService {
 

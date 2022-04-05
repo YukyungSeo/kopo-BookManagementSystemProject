@@ -1,9 +1,9 @@
-package kr.ac.kopo.inMemory.test;
+package kr.ac.kopo.test;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.inMemory.model.Book;
-import kr.ac.kopo.inMemory.model.User;
+import kr.ac.kopo.model.Book;
+import kr.ac.kopo.model.User;
 import kr.ac.kopo.util.PrintLibrarySystemListUtil;
 
 public class PrintLibrarySystemListUtilTest {

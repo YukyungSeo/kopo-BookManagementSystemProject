@@ -1,6 +1,6 @@
-package kr.ac.kopo.inMemory.controller;
+package kr.ac.kopo.controller;
 
-import kr.ac.kopo.inMemory.model.Manager;
+import kr.ac.kopo.model.Manager;
 
 public class ManagerMenuController implements MenuController {
 

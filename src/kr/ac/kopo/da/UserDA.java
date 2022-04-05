@@ -1,10 +1,10 @@
-package kr.ac.kopo.inMemory.da;
+package kr.ac.kopo.da;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.ac.kopo.inMemory.model.User;
+import kr.ac.kopo.model.User;
 
 public class UserDA implements MapDA<String, User> {
 

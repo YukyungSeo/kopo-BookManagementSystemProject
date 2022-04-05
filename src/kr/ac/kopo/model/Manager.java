@@ -1,4 +1,4 @@
-package kr.ac.kopo.inMemory.model;
+package kr.ac.kopo.model;
 
 public class Manager extends User {
 

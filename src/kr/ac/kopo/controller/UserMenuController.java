@@ -1,6 +1,6 @@
-package kr.ac.kopo.inMemory.controller;
+package kr.ac.kopo.controller;
 
-import kr.ac.kopo.inMemory.model.User;
+import kr.ac.kopo.model.User;
 
 public class UserMenuController implements MenuController {
 

@@ -1,6 +1,6 @@
-package kr.ac.kopo.inMemory;
+package kr.ac.kopo;
 
-import kr.ac.kopo.inMemory.controller.AccountMenuController;
+import kr.ac.kopo.controller.AccountMenuController;
 
 public class BookManagementSystemMain {
 

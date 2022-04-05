@@ -1,4 +1,4 @@
-package kr.ac.kopo.inMemory.controller;
+package kr.ac.kopo.controller;
 
 public class MemberManagementMenuContorller implements MenuController{
 

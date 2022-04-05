@@ -1,4 +1,4 @@
-package kr.ac.kopo.inMemory.test;
+package kr.ac.kopo.test;
 
 public class TestMain {
 

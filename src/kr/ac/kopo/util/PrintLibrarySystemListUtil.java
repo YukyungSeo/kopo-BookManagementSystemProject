@@ -2,8 +2,8 @@ package kr.ac.kopo.util;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.inMemory.model.Book;
-import kr.ac.kopo.inMemory.model.User;
+import kr.ac.kopo.model.Book;
+import kr.ac.kopo.model.User;
 
 public class PrintLibrarySystemListUtil extends ScannerIOUtil {
 	

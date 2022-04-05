@@ -1,7 +1,6 @@
 package kr.ac.kopo.inMemory.controller;
 
 import kr.ac.kopo.inMemory.model.Manager;
-import kr.ac.kopo.inMemory.model.Member;
 import kr.ac.kopo.inMemory.model.User;
 import kr.ac.kopo.inMemory.service.UserService;
 
@@ -54,7 +53,7 @@ public class AccountMenuController implements MenuController {
 		if (c == 'y' || c == 'Y') {
 			user = new Manager(id, pwd, name, birth, email, phoneNumber);
 		} else {
-			user = new Member(id, pwd, name, birth, email, phoneNumber);
+			user = new User(id, pwd, name, birth, email, phoneNumber);
 		}
 
 		return us.join(user);

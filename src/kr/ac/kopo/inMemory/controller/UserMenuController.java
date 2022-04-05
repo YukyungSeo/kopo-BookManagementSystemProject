@@ -1,26 +1,26 @@
 package kr.ac.kopo.inMemory.controller;
 
-import kr.ac.kopo.inMemory.model.Member;
+import kr.ac.kopo.inMemory.model.User;
 
-public class MemberMenuController implements MenuController {
+public class UserMenuController implements MenuController {
 
-	Member member;
+	User user;
 
-	public MemberMenuController() {
+	public UserMenuController() {
 		super();
 	}
 
-	public MemberMenuController(Member member) {
+	public UserMenuController(User user) {
 		super();
-		this.member = member;
+		this.user = user;
 	}
 
-	public Member getMember() {
-		return member;
+	public User getUser() {
+		return user;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

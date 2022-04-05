@@ -2,7 +2,7 @@ package kr.ac.kopo.controller;
 
 import kr.ac.kopo.model.Manager;
 
-public class ManagerMenuController implements MenuController {
+public class ManagerMenuController extends UserMenuController {
 
 	Manager manager;
 
@@ -26,6 +26,8 @@ public class ManagerMenuController implements MenuController {
 	@Override
 	public void process() {
 		// TODO Auto-generated method stub
+		IO.println("관리자 page 입니다.");
+		
 
 	}
 

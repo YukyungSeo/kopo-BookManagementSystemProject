@@ -25,8 +25,9 @@ public class AccountMenuController implements MenuController {
 					IO.print("오류가 발생되었습니다");
 				break;
 			case 2:
-				login();
-				break;
+					gotoLoginMenu(login());
+
+					break;
 			case 3:
 				IO.println("프로그램을 종료합니다.");
 				break;
@@ -72,37 +73,32 @@ public class AccountMenuController implements MenuController {
 		return id;
 	}
 
-	private void login() {
+	private User login() {
 		// TODO Auto-generated method stub
-//		String id = IO.getString("아이디 : ");
-//
-//		User user = null;
-//		if (user == null) {
-//			IO.println("입력하신 정보가 맞지 않습니다.");
-//			return;
-//		}
-//
-//		String pwd = IO.getString("패스워드 : ");
-//		if (!user.getPassword().equals(pwd)) {
-//			IO.println("입력정보가 맞지 않습니다.");
-//			return;
-//		}
-//
-//		if (user instanceof Manager) {
-//			char c = IO.getChar("관리자입니다. 항목을 선택하세요(1.관리자메뉴 2.회원메뉴) : ");
-//			switch (c) {
-//			case 1:
-////				ManagerMenuController managerMC = new ManagerMenuController((Manager)user);
-//				break;
-//			case 2:
-//				// TODO:: 수정
-////				MemberMenuController memeberMC = new MemberMenuController((Member)user);
-//			default:
-//				IO.println("항목이 존재하지 않습니다.");
-//				break;
-//			}
-//		}
+		String id = IO.getString("아이디 : ");
+		String pwd = IO.getString("패스워드 : ");
 
+		UserService us = new UserService();
+		User user = us.get(id);
+
+		if (!user.getPassword().equals(pwd)) {
+			IO.println("입력정보가 맞지 않습니다.");
+			return null;
+		}
+
+		IO.println("로그인되었습니다");
+		return user;
+	}
+
+	private void gotoLoginMenu(User user) {
+		
+		if (user instanceof Manager) {
+			ManagerMenuController mmc = new ManagerMenuController((Manager) user);
+			mmc.process();
+		} else {
+			UserMenuController umc = new UserMenuController(user);
+			umc.process();
+		}
 	}
 
 }

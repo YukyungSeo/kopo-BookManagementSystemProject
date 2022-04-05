@@ -49,8 +49,8 @@ public class UserService {
 	}
 
 	public User get(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDA uda = new UserDA();
+		return uda.get(id);
 	}
 
 }

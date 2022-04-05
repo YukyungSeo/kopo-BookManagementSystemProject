@@ -26,6 +26,7 @@ public class UserMenuController implements MenuController {
 	@Override
 	public void process() {
 		// TODO Auto-generated method stub
+		IO.println("일반회원 page 입니다.");
 		myPage();
 		searchBook();
 		borrowBook();

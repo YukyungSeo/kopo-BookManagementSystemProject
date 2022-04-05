@@ -34,22 +34,22 @@ public class UserMenuController implements MenuController {
 
 	}
 
-	private void myPage() {
+	protected void myPage() {
 		// TODO Auto-generated method stub
 
 	}
 
-	private void searchBook() {
+	protected void searchBook() {
 		// TODO Auto-generated method stub
 
 	}
 
-	private void borrowBook() {
+	protected void borrowBook() {
 		// TODO Auto-generated method stub
 
 	}
 
-	private void returnBook() {
+	protected void returnBook() {
 		// TODO Auto-generated method stub
 
 	}

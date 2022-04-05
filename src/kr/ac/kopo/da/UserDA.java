@@ -25,8 +25,7 @@ public class UserDA implements MapDA<String, User> {
 
 	@Override
 	public User remove(String k) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountMap.remove(k);
 	}
 
 	@Override

@@ -15,13 +15,23 @@ public class ScannerIOUtil {
 	}
 
 	public int getInt(String msg) {
-		print(msg);
-		return Integer.parseInt(sc.nextLine());
+		try {
+			print(msg);
+			return Integer.parseInt(sc.nextLine());
+		} catch (Exception e) {
+			print("잘못입력하셨습니다.");
+			return 0;
+		}
 	}
 
 	public char getChar(String msg) {
-		print(msg);
-		return sc.nextLine().charAt(0);
+		try {
+			print(msg);
+			return sc.nextLine().charAt(0);
+		} catch (Exception e) {
+			println("잘못입력하셨습니다.");
+			return 'z';
+		}
 	}
 
 	public String getString(String msg) {

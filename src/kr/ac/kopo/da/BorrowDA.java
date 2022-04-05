@@ -35,7 +35,7 @@ public class BorrowDA implements MapDA<String, String> {
 	}
 
 	@Override
-	public ArrayList<String> getAll(String value) {
+	public ArrayList<String> getList(String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

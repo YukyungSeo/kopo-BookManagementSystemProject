@@ -3,12 +3,14 @@ package kr.ac.kopo.da;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import kr.ac.kopo.model.Book;
 
 public class BookDA implements MapDA<String, Book> {
 
-	private final static Map<String, Book> bookMap = new HashMap<>();
+	private final static Map<String, Book> BOOKMAP = new HashMap<>();
 
 	public BookDA() {
 		super();
@@ -18,29 +20,38 @@ public class BookDA implements MapDA<String, Book> {
 		super();
 	}
 
-	public Map<String, Book> getBookMap() {
-		return bookMap;
+	public Map<String, Book> getBOOKMAP() {
+		return BOOKMAP;
 	}
 
 	@Override
 	public boolean add(String k, Book v) {
-		return bookMap.put(k, v) == null;
+		return BOOKMAP.put(k, v) == null;
 	}
 
 	@Override
 	public Book remove(String k) {
-		return bookMap.remove(k);
+		return BOOKMAP.remove(k);
 	}
 
 	@Override
 	public Book get(String k) {
-		return bookMap.get(k);
+		return BOOKMAP.get(k);
 	}
 
 	@Override
-	public ArrayList<Book> getAll(String value) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Book> getList(String value) {
+		ArrayList<Book> arr = new ArrayList<Book>();
+
+		Set<Entry<String, Book>> set = this.getBOOKMAP().entrySet();
+		for (Entry<String, Book> entry : set) {
+			Book book = entry.getValue();
+			if (book.getIsbn().contains(value) || book.getTitle().contains(value) || book.getAuthor().contains(value)
+					|| book.getPublisher().contains(value)) {
+				arr.add(book);
+			}
+		}
+		return arr;
 	}
 
 }

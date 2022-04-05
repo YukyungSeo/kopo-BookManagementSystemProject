@@ -1,8 +1,6 @@
 package kr.ac.kopo.service;
 
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import kr.ac.kopo.da.UserDA;
 import kr.ac.kopo.model.User;
@@ -35,18 +33,8 @@ public class UserService {
 	}
 
 	public ArrayList<User> search(String value) {
-		ArrayList<User> arr = new ArrayList<User>();
-
 		UserDA uda = new UserDA();
-		Set<Entry<String, User>> set = uda.getAccountMap().entrySet();
-		for (Entry<String, User> entry : set) {
-			User user = entry.getValue();
-			if (user.getId().contains(value) || user.getName().contains(value) || user.getBirth().contains(value)
-					|| user.getEmail().contains(value) || user.getPhoneNumber().contains(value)) {
-				arr.add(user);
-			}
-		}
-		return arr;
+		return uda.getList(value);
 	}
 
 	public User get(String id) {

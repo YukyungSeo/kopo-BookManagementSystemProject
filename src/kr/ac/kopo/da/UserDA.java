@@ -3,40 +3,51 @@ package kr.ac.kopo.da;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import kr.ac.kopo.model.User;
 
 public class UserDA implements MapDA<String, User> {
 
-	private final static Map<String, User> accountMap = new HashMap<>();
+	private final static Map<String, User> USERMAP = new HashMap<>();
 
 	public UserDA() {
 		super();
 	}
 
-	public Map<String, User> getAccountMap() {
-		return accountMap;
+	public Map<String, User> getUSERMAP() {
+		return USERMAP;
 	}
 
 	@Override
 	public boolean add(String k, User v) {
-		return accountMap.put(k, v) == null;
+		return USERMAP.put(k, v) == null;
 	}
 
 	@Override
 	public User remove(String k) {
-		return accountMap.remove(k);
+		return USERMAP.remove(k);
 	}
 
 	@Override
 	public User get(String k) {
-		return accountMap.get(k);
+		return USERMAP.get(k);
 	}
 
 	@Override
-	public ArrayList<User> getAll(String value) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<User> getList(String value) {
+		ArrayList<User> arr = new ArrayList<User>();
+
+		Set<Entry<String, User>> set = this.getUSERMAP().entrySet();
+		for (Entry<String, User> entry : set) {
+			User user = entry.getValue();
+			if (user.getId().contains(value) || user.getName().contains(value) || user.getBirth().contains(value)
+					|| user.getEmail().contains(value) || user.getPhoneNumber().contains(value)) {
+				arr.add(user);
+			}
+		}
+		return arr;
 	}
 
 }

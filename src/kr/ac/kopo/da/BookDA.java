@@ -3,8 +3,8 @@ package kr.ac.kopo.da;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import kr.ac.kopo.model.Book;
 
@@ -22,6 +22,10 @@ public class BookDA implements MapDA<String, Book> {
 
 	public Map<String, Book> getBOOKMAP() {
 		return BOOKMAP;
+	}
+	
+	public boolean containISBN(String k) {
+		return this.get(k) != null;
 	}
 
 	@Override

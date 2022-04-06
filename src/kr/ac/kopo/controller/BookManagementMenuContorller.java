@@ -60,7 +60,8 @@ public class BookManagementMenuContorller implements MenuController {
 		int num = IO.getInt("삭제하실 도서 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
 			String id = IO.getString((i + 1) + "번째 아이디 : ");
-			bs.remove(id);
+			if(bs.remove(id) == null)
+				IO.println("해당 ISBN을 가진 도서는 존재하지 않습니다.");
 		}
 	}
 

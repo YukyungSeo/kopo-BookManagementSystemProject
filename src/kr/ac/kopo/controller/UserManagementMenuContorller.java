@@ -1,7 +1,7 @@
 package kr.ac.kopo.controller;
 
 import kr.ac.kopo.service.UserService;
-import kr.ac.kopo.util.PrintLibrarySystemListUtil;
+import kr.ac.kopo.util.PrintLibrarySystemUtil;
 
 public class UserManagementMenuContorller extends AccountMenuController implements MenuController {
 
@@ -48,7 +48,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 
 	private void searchUser() {
 		UserService us = new UserService();
-		PrintLibrarySystemListUtil pu = new PrintLibrarySystemListUtil();
+		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
 
 		String value = IO.getString("검색어 : ");
 		pu.printUserList(us.search(value));

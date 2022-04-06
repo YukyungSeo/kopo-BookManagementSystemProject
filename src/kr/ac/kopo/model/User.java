@@ -5,7 +5,7 @@ public class User {
 	private String id;
 	private String password;
 	private String name;
-	private String birth;
+	private String birth; // TODO: Date class로 바꾸기
 	private String email;
 	private String phoneNumber;
 

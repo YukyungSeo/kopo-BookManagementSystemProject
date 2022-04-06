@@ -2,15 +2,12 @@ package kr.ac.kopo.controller;
 
 import kr.ac.kopo.model.User;
 import kr.ac.kopo.service.BookService;
-import kr.ac.kopo.util.PrintLibrarySystemListUtil;
+import kr.ac.kopo.service.BorrowService;
+import kr.ac.kopo.util.PrintLibrarySystemUtil;
 
 public class UserMenuController implements MenuController {
 
 	private User user;
-
-	public UserMenuController() {
-		super();
-	}
 
 	public UserMenuController(User user) {
 		super();
@@ -57,26 +54,38 @@ public class UserMenuController implements MenuController {
 	}
 
 	protected void myPage() {
-		// TODO Auto-generated method stub
-
+		BorrowService bs = new BorrowService();
+		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		
+		pu.printUserInfo(user);
+		pu.printBorrowList(bs.search(user.getId()));
 	}
 
 	protected void searchBook() {
 		BookService bs = new BookService();
-		PrintLibrarySystemListUtil pu = new PrintLibrarySystemListUtil();
+		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
 
 		String value = IO.getString("검색어 : ");
 		pu.printBookList(bs.search(value));
 	}
 
 	protected void borrowBook() {
-		// TODO Auto-generated method stub
-
+		BorrowService bs = new BorrowService();
+		
+		String isbn = IO.getString("도서 ISBN : ");
+		if(!bs.borrowBook(isbn, user.getId())) {
+			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
+		}
 	}
 
 	protected void returnBook() {
 		// TODO Auto-generated method stub
-
+		BorrowService bs = new BorrowService();
+		
+		String isbn = IO.getString("도서 ISBN : ");
+		if(!bs.returnBook(isbn, user.getId())) {
+			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
+		}
 	}
 
 }

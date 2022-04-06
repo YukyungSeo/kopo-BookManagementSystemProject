@@ -1,4 +1,4 @@
-package kr.ac.kopo.da;
+package kr.ac.kopo.inMemory.da;
 
 import java.util.ArrayList;
 import java.util.HashMap;

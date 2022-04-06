@@ -7,8 +7,6 @@ public class Borrow {
 	private String isbn;
 	private String title;
 	private String userId;
-
-	// TODO: Date class로 바꾸기
 	private Date borrowDate;
 	private Date returnDate;
 

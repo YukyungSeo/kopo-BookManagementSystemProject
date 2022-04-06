@@ -42,7 +42,9 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		int num = IO.getInt("삭제하실 회원 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
 			String id = IO.getString((i + 1) + "번째 아이디 : ");
-			us.remove(id);
+			if(!us.containID(id))
+				IO.println("해당 아이디가 존재하지 않습니다.");
+			us.removeUser(id);
 		}
 	}
 
@@ -51,7 +53,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
 
 		String value = IO.getString("검색어 : ");
-		pu.printUserList(us.search(value));
+		pu.printUserList(us.searchUser(value));
 	}
 
 	private void managerApproval() {

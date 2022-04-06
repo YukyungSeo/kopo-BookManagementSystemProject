@@ -20,7 +20,7 @@ public class ScannerIOUtil {
 			return Integer.parseInt(sc.nextLine());
 		} catch (Exception e) {
 			print("잘못입력하셨습니다.");
-			return 0;
+			return Integer.MIN_VALUE;
 		}
 	}
 

@@ -2,7 +2,7 @@ package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.da.BookDA;
+import kr.ac.kopo.inMemory.da.BookDA;
 import kr.ac.kopo.model.Book;
 
 public class BookService {
@@ -21,6 +21,7 @@ public class BookService {
 	}
 
 	public Book remove(Book e) {
+		// TODO 대여중인 도서를 삭제할 경우 대여정보도 삭제
 		return this.remove(e.getIsbn());
 	}
 

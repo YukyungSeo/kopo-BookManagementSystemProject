@@ -1,4 +1,4 @@
-package kr.ac.kopo.da;
+package kr.ac.kopo.inFile.da;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,6 @@ public class BorrowDA implements MapDA<String, Borrow> {
 
 	@Override
 	public Borrow remove(String k) {
-		// TODO Auto-generated method stub
 		return BORROWMAP.remove(k);
 	}
 

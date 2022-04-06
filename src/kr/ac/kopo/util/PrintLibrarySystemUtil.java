@@ -10,13 +10,6 @@ import kr.ac.kopo.model.User;
 
 public class PrintLibrarySystemUtil extends ScannerIOUtil {
 
-	// TODO
-//	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-
-	public PrintLibrarySystemUtil() {
-		super();
-	}
-
 	public void printUserList(ArrayList<User> list) {
 
 		println("< 회원 목록 >");
@@ -63,7 +56,7 @@ public class PrintLibrarySystemUtil extends ScannerIOUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		Calendar bc = Calendar.getInstance();
 		Calendar rc = Calendar.getInstance();
-		
+
 		println("< 대여 목록 >");
 		println("--------------------------------------------------------------------------------------------");
 		println("\tISBN\t도서제목\t대여자ID\t대여일\t반납일\t");
@@ -71,10 +64,10 @@ public class PrintLibrarySystemUtil extends ScannerIOUtil {
 		for (Borrow borrow : list) {
 			bc.setTime(borrow.getBorrowDate());
 			rc.setTime(borrow.getReturnDate());
-			
+
 			println("--------------------------------------------------------------------------------------------");
 			println(String.format("\t%s\t%s\t%s\t%s\t%s", borrow.getIsbn(), borrow.getTitle(), borrow.getUserId(),
-					 sdf.format(bc.getTime()), sdf.format(rc.getTime())));
+					sdf.format(bc.getTime()), sdf.format(rc.getTime())));
 		}
 		println("--------------------------------------------------------------------------------------------");
 	}

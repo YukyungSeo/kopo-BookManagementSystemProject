@@ -24,7 +24,6 @@ public class UserMenuController implements MenuController {
 
 	@Override
 	public void process() {
-		// TODO Auto-generated method stub
 		IO.println(" < 일반회원 page 입니다. >");
 		int selection = -1;
 		while (selection != 7) {
@@ -56,9 +55,9 @@ public class UserMenuController implements MenuController {
 	protected void myPage() {
 		BorrowService bs = new BorrowService();
 		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
-		
+
 		pu.printUserInfo(user);
-		pu.printBorrowList(bs.search(user.getId()));
+		pu.printBorrowList(bs.searchBook(user.getId()));
 	}
 
 	protected void searchBook() {
@@ -71,21 +70,25 @@ public class UserMenuController implements MenuController {
 
 	protected void borrowBook() {
 		BorrowService bs = new BorrowService();
-		
+
 		String isbn = IO.getString("도서 ISBN : ");
-		if(!bs.borrowBook(isbn, user.getId())) {
+		if (!bs.borrowBook(isbn, user.getId())) {
 			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
 		}
+
+		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		pu.printBorrowList(bs.searchBook(user.getId()));
 	}
 
 	protected void returnBook() {
-		// TODO Auto-generated method stub
 		BorrowService bs = new BorrowService();
-		
+
 		String isbn = IO.getString("도서 ISBN : ");
-		if(!bs.returnBook(isbn, user.getId())) {
+		if (!bs.returnBook(isbn, user.getId())) {
 			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
 		}
+		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		pu.printBorrowList(bs.searchBook(user.getId()));
 	}
 
 }

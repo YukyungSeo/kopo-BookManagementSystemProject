@@ -34,10 +34,14 @@ public class AccountController implements Controller {
 		while (true) {
 			id = IO.getString("아이디 : ");
 
-			if (!us.containID(id))
+			if (!us.checkId(id))
+				IO.println("아이디가 빈 값입니다. 다시 입력해주세요.");
+			
+			else if (us.containID(id))
+				IO.println("해당 아이디는 이미 존재합니다. 다시 입력해주세요.");
+			
+			else
 				break;
-
-			IO.println("해당 아이디는 이미 존재합니다. 다시 입력해주세요.");
 		}
 		return id;
 	}
@@ -54,7 +58,7 @@ public class AccountController implements Controller {
 			return null;
 		}
 
-		return us.get(id);
+		return us.getUser(id);
 	}
 
 	protected User resign() {
@@ -69,7 +73,7 @@ public class AccountController implements Controller {
 			return null;
 		}
 
-		return us.remove(user);
+		return us.removeUser(user);
 	}
 
 }

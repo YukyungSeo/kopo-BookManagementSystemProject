@@ -2,7 +2,7 @@ package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.da.UserDA;
+import kr.ac.kopo.inMemory.da.UserDA;
 import kr.ac.kopo.model.User;
 
 public class UserService {
@@ -11,33 +11,39 @@ public class UserService {
 		UserDA uda = new UserDA();
 		return uda.add(e.getId(), e);
 	}
+	
+	public boolean checkId(String id) {
+		if(id.equals(""))
+			return false;
+		return true;
+	}
 
 	public boolean isUser(User e) {
-		User user = this.get(e.getId());
+		User user = this.getUser(e.getId());
 		if (user.getPassword().equals(e.getPassword()))
 			return true;
 		return false;
 	}
 
 	public boolean containID(String id) {
-		return this.get(id) != null;
+		return this.getUser(id) != null;
 	}
 
-	public User remove(User e) {
-		return this.remove(e.getId());
+	public User removeUser(User e) {
+		return this.removeUser(e.getId());
 	}
 
-	public User remove(String id) {
+	public User removeUser(String id) {
 		UserDA uda = new UserDA();
 		return uda.remove(id);
 	}
 
-	public ArrayList<User> search(String value) {
+	public ArrayList<User> searchUser(String value) {
 		UserDA uda = new UserDA();
 		return uda.getList(value);
 	}
 
-	public User get(String id) {
+	public User getUser(String id) {
 		UserDA uda = new UserDA();
 		return uda.get(id);
 	}

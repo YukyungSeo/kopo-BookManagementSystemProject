@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import kr.ac.kopo.da.BookDA;
-import kr.ac.kopo.da.BorrowDA;
+import kr.ac.kopo.inMemory.da.BookDA;
+import kr.ac.kopo.inMemory.da.BorrowDA;
 import kr.ac.kopo.model.Book;
 import kr.ac.kopo.model.Borrow;
 
@@ -52,7 +52,7 @@ public class BorrowService {
 		return true;
 	}
 
-	public ArrayList<Borrow> search(String userId) {
+	public ArrayList<Borrow> searchBook(String userId) {
 		BorrowDA bda = new BorrowDA();
 		return bda.getList(userId);
 	}

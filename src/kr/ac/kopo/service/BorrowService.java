@@ -54,6 +54,6 @@ public class BorrowService {
 
 	public ArrayList<Borrow> searchBook(String userId) {
 		BorrowDA bda = new BorrowDA();
-		return bda.getList(userId);
+		return bda.getListWithID(userId);
 	}
 }

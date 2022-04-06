@@ -65,7 +65,7 @@ public class UserMenuController implements MenuController {
 		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
 
 		String value = IO.getString("검색어 : ");
-		pu.printBookList(bs.search(value));
+		pu.printBookList(bs.searchBook(value));
 	}
 
 	protected void borrowBook() {

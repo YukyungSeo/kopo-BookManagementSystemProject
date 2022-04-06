@@ -64,4 +64,8 @@ public class BookDA implements MapDA<String, Book> {
 		return arr;
 	}
 
+	public void saveData() {
+		FileReadWrite.write("book", BookDA.BOOKMAP);
+	}
+
 }

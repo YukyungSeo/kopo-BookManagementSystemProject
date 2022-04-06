@@ -17,24 +17,27 @@ public class BorrowService {
 		// TODO 안되는 이유 각각 출력 (예외처리)
 		BookDA bookda = new BookDA();
 		BorrowDA bda = new BorrowDA();
+
 		if (!bookda.containISBN(isbn)) { // 해당 ISBN이 없어면 false
 			return false;
 		}
-		if(bda.containISBN(isbn)) { // 대여 중이면 false
+
+		if (bda.containISBN(isbn)) { // 대여 중이면 false
 			return false;
 		}
-		
+
 		Book book = bookda.get(isbn);
 		book.setBorrow(true);
-		
+		bookda.saveData();
+
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
-		c.add(Calendar.DATE, 7);  // 7일을 더해준다.
-		
+		c.add(Calendar.DATE, 7); // 7일을 더해준다.
+
 		bda.add(isbn, new Borrow(isbn, book.getTitle(), userId, new Date(), c.getTime()));
 		return true;
 	}
-	
+
 	public boolean returnBook(String isbn, String userId) {
 		BookDA bookda = new BookDA();
 		BorrowDA bda = new BorrowDA();
@@ -43,13 +46,14 @@ public class BorrowService {
 		}
 
 		Borrow borrow = bda.get(isbn);
-		if(!borrow.getUserId().equals(userId)) {
+		if (!borrow.getUserId().equals(userId)) {
 			return false;
 		}
-		
+
 		Book book = bookda.get(isbn);
 		book.setBorrow(false);
-		
+		bookda.saveData();
+
 		bda.remove(isbn);
 		return true;
 	}

@@ -1,19 +1,21 @@
 package kr.ac.kopo.inFile.da;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import kr.ac.kopo.model.Book;
+import kr.ac.kopo.util.FileReadWrite;
 
 public class BookDA implements MapDA<String, Book> {
 
-	private final static Map<String, Book> BOOKMAP = new HashMap<>();
+	private static Map<String, Book> BOOKMAP;
 
+	@SuppressWarnings("unchecked")
 	public BookDA() {
 		super();
+		BookDA.BOOKMAP = (Map<String, Book>) FileReadWrite.read("book");
 	}
 
 	public BookDA(Map<String, Book> bookMap) {
@@ -23,19 +25,23 @@ public class BookDA implements MapDA<String, Book> {
 	public Map<String, Book> getBOOKMAP() {
 		return BOOKMAP;
 	}
-	
+
 	public boolean containISBN(String k) {
 		return this.get(k) != null;
 	}
 
 	@Override
 	public boolean add(String k, Book v) {
-		return BOOKMAP.put(k, v) == null;
+		boolean bool = BOOKMAP.put(k, v) == null;
+		FileReadWrite.write("book", BookDA.BOOKMAP);
+		return bool;
 	}
 
 	@Override
 	public Book remove(String k) {
-		return BOOKMAP.remove(k);
+		Book book = BookDA.BOOKMAP.remove(k);
+		FileReadWrite.write("book", BookDA.BOOKMAP);
+		return book;
 	}
 
 	@Override

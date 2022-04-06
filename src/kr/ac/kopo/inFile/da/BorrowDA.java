@@ -1,23 +1,25 @@
 package kr.ac.kopo.inFile.da;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import kr.ac.kopo.model.Borrow;
+import kr.ac.kopo.util.FileReadWrite;
 
 public class BorrowDA implements MapDA<String, Borrow> {
 
-	private final static Map<String, Borrow> BORROWMAP = new HashMap<>();
+	private static Map<String, Borrow> BORROWMAP;
 
+	@SuppressWarnings("unchecked")
 	public BorrowDA() {
 		super();
+		BorrowDA.BORROWMAP = (Map<String, Borrow>) FileReadWrite.read("borrow");
 	}
 
 	public Map<String, Borrow> getBORROWMAP() {
-		return BORROWMAP;
+		return BorrowDA.BORROWMAP;
 	}
 
 	public boolean containISBN(String k) {
@@ -26,17 +28,21 @@ public class BorrowDA implements MapDA<String, Borrow> {
 
 	@Override
 	public boolean add(String k, Borrow v) {
-		return BORROWMAP.put(k, v) == null;
+		boolean bool = BorrowDA.BORROWMAP.put(k, v) == null;
+		FileReadWrite.write("borrow", BorrowDA.BORROWMAP);
+		return bool;
 	}
 
 	@Override
 	public Borrow remove(String k) {
-		return BORROWMAP.remove(k);
+		Borrow borrow = BorrowDA.BORROWMAP.remove(k);
+		FileReadWrite.write("borrow", BorrowDA.BORROWMAP);
+		return borrow;
 	}
 
 	@Override
 	public Borrow get(String k) {
-		return BORROWMAP.get(k);
+		return BorrowDA.BORROWMAP.get(k);
 	}
 
 	@Override

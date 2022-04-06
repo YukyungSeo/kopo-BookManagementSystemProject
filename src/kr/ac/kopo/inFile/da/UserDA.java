@@ -1,38 +1,50 @@
 package kr.ac.kopo.inFile.da;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import kr.ac.kopo.model.User;
+import kr.ac.kopo.util.FileReadWrite;
 
 public class UserDA implements MapDA<String, User> {
 
-	private final static Map<String, User> USERMAP = new HashMap<>();
+	private static Map<String, User> USERMAP;
 
+	@SuppressWarnings("unchecked")
 	public UserDA() {
 		super();
+		UserDA.USERMAP = (Map<String, User>) FileReadWrite.read("user");
+
+		// debugging
+//		Set<Entry<String, User>> set = UserDA.USERMAP.entrySet();
+//		for (Entry<String, User> entry : set) {
+//			System.out.println(entry.getValue());
+//		}
 	}
 
 	public Map<String, User> getUSERMAP() {
-		return USERMAP;
+		return UserDA.USERMAP;
 	}
 
 	@Override
 	public boolean add(String k, User v) {
-		return USERMAP.put(k, v) == null;
+		boolean bool = UserDA.USERMAP.put(k, v) == null;
+		FileReadWrite.write("user", UserDA.USERMAP);
+		return bool;
 	}
 
 	@Override
 	public User remove(String k) {
-		return USERMAP.remove(k);
+		User user = UserDA.USERMAP.remove(k);
+		FileReadWrite.write("user", UserDA.USERMAP);
+		return user;
 	}
 
 	@Override
 	public User get(String k) {
-		return USERMAP.get(k);
+		return UserDA.USERMAP.get(k);
 	}
 
 	@Override

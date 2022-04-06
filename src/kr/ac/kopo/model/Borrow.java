@@ -1,8 +1,10 @@
 package kr.ac.kopo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Borrow {
+@SuppressWarnings("serial")
+public class Borrow implements Serializable {
 
 	private String isbn;
 	private String title;

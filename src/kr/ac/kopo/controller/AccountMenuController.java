@@ -47,8 +47,7 @@ public class AccountMenuController implements MenuController {
 		if (user != null) {
 			IO.println("로그인되었습니다");
 			this.gotoLoginMenu(user);
-		} else
-			IO.print("오류가 발생되었습니다");
+		}
 	}
 
 	private void gotoLoginMenu(User user) {

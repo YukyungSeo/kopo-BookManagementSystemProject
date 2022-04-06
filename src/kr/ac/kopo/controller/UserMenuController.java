@@ -26,7 +26,7 @@ public class UserMenuController implements MenuController {
 	public void process() {
 		IO.println(" < 일반회원 page 입니다. >");
 		int selection = -1;
-		while (selection != 7) {
+		while (selection != 5) {
 			selection = IO.getInt("항목을 선택하세요(1.마이페이지 2.도서검색 3.도서대여 4.도서반납 5.로그아웃) : ");
 			switch (selection) {
 			case 1:
@@ -41,7 +41,7 @@ public class UserMenuController implements MenuController {
 			case 4:
 				this.returnBook();
 				break;
-			case 7:
+			case 5:
 				IO.println("로그아웃합니다.");
 				break;
 			default:

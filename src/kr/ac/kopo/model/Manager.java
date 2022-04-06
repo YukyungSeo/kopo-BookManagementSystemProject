@@ -1,5 +1,6 @@
 package kr.ac.kopo.model;
 
+@SuppressWarnings("serial")
 public class Manager extends User {
 
 	public Manager() {

@@ -1,6 +1,9 @@
 package kr.ac.kopo.model;
 
-public class User {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class User implements Serializable{
 
 	private String id;
 	private String password;

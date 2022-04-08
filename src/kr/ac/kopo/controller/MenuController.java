@@ -1,7 +1,11 @@
 package kr.ac.kopo.controller;
 
+import kr.ac.kopo.util.PrintBoundaryUtil;
+
 public interface MenuController extends Controller {
 
-	public void process();
+	public static final PrintBoundaryUtil PBU = new PrintBoundaryUtil(IO);
+
+	public abstract void process();
 
 }

@@ -1,14 +1,16 @@
 package kr.ac.kopo.controller;
 
 import kr.ac.kopo.service.UserService;
-import kr.ac.kopo.util.PrintLibrarySystemUtil;
+import kr.ac.kopo.util.PrintListUtil;
 
 public class UserManagementMenuContorller extends AccountMenuController implements MenuController {
 
 	@Override
 	public void process() {
-		IO.println(" < 회원 관리 page 입니다. >");
-		int selection = IO.getInt("항목을 선택하세요(1.회원등록 2.회원삭제 3.회원검색 4.관리자승인) : ");
+		
+		PBU.boundaryOfMenuStart();
+		IO.println(" < 관리자 page - 회원 관리 page 입니다. >");
+		int selection = IO.getInt("항목을 선택하세요(1.회원등록 2.회원삭제 3.회원검색 4.관리자승인 5.이전메뉴) : ");
 		switch (selection) {
 		case 1:
 			this.addUser();
@@ -22,10 +24,13 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		case 4:
 			managerApproval();
 			break;
+		case 5:
+			break;
 		default:
-			IO.println("항목이 존재하지 않습니다.");
+			IO.println("항목이 존재하지 않습니다. 이전 메뉴로 돌아갑니다.");
 			break;
 		}
+		PBU.boundaryOfMenuEnd();
 	}
 
 	private void addUser() {
@@ -50,7 +55,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 
 	private void searchUser() {
 		UserService us = new UserService();
-		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		PrintListUtil pu = new PrintListUtil();
 
 		String value = IO.getString("검색어 : ");
 		pu.printUserList(us.searchUser(value));

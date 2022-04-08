@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import kr.ac.kopo.model.Book;
 import kr.ac.kopo.model.User;
-import kr.ac.kopo.util.PrintLibrarySystemUtil;
+import kr.ac.kopo.util.PrintListUtil;
 
 public class PrintLibrarySystemListUtilTest {
 
-	PrintLibrarySystemUtil plu = new PrintLibrarySystemUtil();
+	PrintListUtil plu = new PrintListUtil();
 	
 	public void printUserListTest () {
 

@@ -7,8 +7,9 @@ public class BookManagementMenuContorller implements MenuController {
 
 	@Override
 	public void process() {
-		IO.println(" < 도서 관리 입니다. >");
-		int selection = IO.getInt("항목을 선택하세요(1.도서등록 2.도서삭제) : ");
+		PBU.boundaryOfMenuStart();
+		IO.println(" < 관리자 page - 도서 관리 page 입니다. >");
+		int selection = IO.getInt("항목을 선택하세요(1.도서등록 2.도서삭제 3.이전메뉴) : ");
 		switch (selection) {
 		case 1:
 			this.addBook();
@@ -16,10 +17,13 @@ public class BookManagementMenuContorller implements MenuController {
 		case 2:
 			this.removeBook();
 			break;
+		case 3:
+			break;
 		default:
-			IO.println("항목이 존재하지 않습니다.");
+			IO.println("항목이 존재하지 않습니다. 이전메뉴로 돌아갑니다.");
 			break;
 		}
+		PBU.boundaryOfMenuEnd();
 	}
 
 	private void addBook() {
@@ -60,7 +64,7 @@ public class BookManagementMenuContorller implements MenuController {
 		int num = IO.getInt("삭제하실 도서 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
 			String id = IO.getString((i + 1) + "번째 ISBN : ");
-			if(bs.removeBook(id) == null)
+			if (bs.removeBook(id) == null)
 				IO.println("해당 ISBN을 가진 도서는 존재하지 않습니다.");
 		}
 	}

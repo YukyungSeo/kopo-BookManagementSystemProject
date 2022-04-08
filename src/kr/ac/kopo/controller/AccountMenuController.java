@@ -5,19 +5,18 @@ import kr.ac.kopo.model.User;
 
 public class AccountMenuController implements MenuController {
 
-	public AccountMenuController() {
-		super();
-	}
-
 	@Override
 	public void process() {
-		IO.println("안녕하세요. 도서관리시스템입니다.");
+		
+		PBU.boundaryOfMenuStart();
 		int selection = -1;
 		while (selection != 3) {
+			IO.println("안녕하세요. 도서관리시스템입니다.");
 			selection = IO.getInt("항목을 선택하세요(1.회원가입 2.로그인 3.종료) : ");
 			switch (selection) {
 			case 1:
 				join();
+				PBU.boundaryOfWork();
 				break;
 			case 2:
 				login();
@@ -27,17 +26,22 @@ public class AccountMenuController implements MenuController {
 				break;
 			default:
 				IO.println("항목이 존재하지 않습니다.");
+				PBU.boundaryOfWork();
 				break;
 			}
 		}
+		PBU.boundaryOfMenuEnd();
+		
 	}
 
 	private void join() {
 		AccountController ac = new AccountController();
 		if (ac.join())
 			IO.println("회원가입이 완료되었습니다");
-		else
+		else {
 			IO.print("오류가 발생되었습니다");
+			PBU.boundaryOfWork();
+		}
 	}
 
 	private void login() {
@@ -47,6 +51,8 @@ public class AccountMenuController implements MenuController {
 		if (user != null) {
 			IO.println("로그인되었습니다");
 			this.gotoLoginMenu(user);
+		} else {
+			PBU.boundaryOfWork();
 		}
 	}
 

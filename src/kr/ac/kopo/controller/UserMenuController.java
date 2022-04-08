@@ -3,7 +3,7 @@ package kr.ac.kopo.controller;
 import kr.ac.kopo.model.User;
 import kr.ac.kopo.service.BookService;
 import kr.ac.kopo.service.BorrowService;
-import kr.ac.kopo.util.PrintLibrarySystemUtil;
+import kr.ac.kopo.util.PrintListUtil;
 
 public class UserMenuController implements MenuController {
 
@@ -24,9 +24,11 @@ public class UserMenuController implements MenuController {
 
 	@Override
 	public void process() {
-		IO.println(" < 일반회원 page 입니다. >");
+		
+		PBU.boundaryOfMenuStart();
 		int selection = -1;
-		while (selection != 5) {
+		loop: while (selection != 5) {
+			IO.println(" < 일반회원 page 입니다. >");
 			selection = IO.getInt("항목을 선택하세요(1.마이페이지 2.도서검색 3.도서대여 4.도서반납 5.로그아웃) : ");
 			switch (selection) {
 			case 1:
@@ -43,18 +45,20 @@ public class UserMenuController implements MenuController {
 				break;
 			case 5:
 				IO.println("로그아웃합니다.");
-				break;
+				break loop;
 			default:
 				IO.println("항목이 존재하지 않습니다.");
 				break;
 			}
+			PBU.boundaryOfWork();
 		}
+		PBU.boundaryOfMenuEnd();
 
 	}
 
 	protected void myPage() {
 		BorrowService bs = new BorrowService();
-		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		PrintListUtil pu = new PrintListUtil();
 
 		pu.printUserInfo(user);
 		pu.printBorrowList(bs.searchBook(user.getId()));
@@ -62,7 +66,7 @@ public class UserMenuController implements MenuController {
 
 	protected void searchBook() {
 		BookService bs = new BookService();
-		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		PrintListUtil pu = new PrintListUtil();
 
 		String value = IO.getString("검색어 : ");
 		pu.printBookList(bs.searchBook(value));
@@ -76,7 +80,7 @@ public class UserMenuController implements MenuController {
 			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
 		}
 
-		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		PrintListUtil pu = new PrintListUtil();
 		pu.printBorrowList(bs.searchBook(user.getId()));
 	}
 
@@ -87,7 +91,7 @@ public class UserMenuController implements MenuController {
 		if (!bs.returnBook(isbn, user.getId())) {
 			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
 		}
-		PrintLibrarySystemUtil pu = new PrintLibrarySystemUtil();
+		PrintListUtil pu = new PrintListUtil();
 		pu.printBorrowList(bs.searchBook(user.getId()));
 	}
 

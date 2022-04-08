@@ -47,4 +47,8 @@ public class ScannerIOUtil {
 		System.out.println(msg);
 	}
 
+	public void println() {
+		System.out.println();
+	}
+
 }

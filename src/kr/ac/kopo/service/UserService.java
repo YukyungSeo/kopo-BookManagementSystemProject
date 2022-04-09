@@ -33,7 +33,7 @@ public class UserService {
 			return true;
 		return false;
 	}
-	
+
 	public User getUser(String id, String pwd) {
 		User user = this.getUser(id);
 		if (user != null && user.getPassword().equals(pwd))
@@ -50,9 +50,9 @@ public class UserService {
 	}
 
 	public ErrorType removeUser(String id) {
-		if(!this.containID(id))
+		if (!this.containID(id))
 			return ErrorType.NOTEXIST;
-		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;		
+		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
 	public ArrayList<User> searchUser(String value) {
@@ -63,4 +63,21 @@ public class UserService {
 		return uda.get(id);
 	}
 
+	public ErrorType modifyPwd(User user, String nerPwd1, String newPwd2) {
+		if (!nerPwd1.equals(newPwd2))
+			return ErrorType.NOTEQUALPWD;
+
+		user.setPassword(nerPwd1);
+		return uda.add(user.getId(), user) ? ErrorType.SUCCESS : ErrorType.FAIL;
+	}
+
+	public ErrorType modifyEmail(User user, String newEmail) {
+		user.setEmail(newEmail);
+		return uda.add(user.getId(), user) ? ErrorType.SUCCESS : ErrorType.FAIL;
+	}
+
+	public ErrorType modifyPhoneNumber(User user, String newPhoneNumber) {
+		user.setPhoneNumber(newPhoneNumber);
+		return uda.add(user.getId(), user) ? ErrorType.SUCCESS : ErrorType.FAIL;
+	}
 }

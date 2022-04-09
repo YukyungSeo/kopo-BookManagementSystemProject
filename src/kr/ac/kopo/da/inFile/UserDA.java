@@ -31,9 +31,8 @@ public class UserDA implements MapDA<String, User> {
 
 	@Override
 	public boolean add(String k, User v) {
-		boolean bool1 = UserDA.USERMAP.put(k, v) == null;
-		boolean bool2 = FileReadWrite.write(dbFilename, UserDA.USERMAP);
-		return bool1 && bool2;
+		UserDA.USERMAP.put(k, v);
+		return FileReadWrite.write(dbFilename, UserDA.USERMAP);
 	}
 
 	@Override

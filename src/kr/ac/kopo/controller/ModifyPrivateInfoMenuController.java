@@ -1,5 +1,7 @@
 package kr.ac.kopo.controller;
 
+import kr.ac.kopo.service.UserService;
+
 public class ModifyPrivateInfoMenuController implements MenuController {
 
 	private UserMenuController umc;
@@ -58,29 +60,67 @@ public class ModifyPrivateInfoMenuController implements MenuController {
 	}
 
 	private void modifyPwd() {
-		String newPwd = IO.getString("새로운 패스워드 : ");
-		if (newPwd.equals(IO.getString("새로운 패스워드 재입력 : "))) {
-			this.umc.getUser().setPassword(newPwd);
-			IO.println("비밀번호가 수정되었습니다.");
-		} else {
+		UserService us = new UserService();
+		
+		String newPwd1 = IO.getString("새로운 패스워드 : ");
+		String newPwd2 = IO.getString("새로운 패스워드 재입력 : ");
+		ErrorType et = us.modifyPwd(this.umc.getUser(), newPwd1, newPwd2);
+		
+		switch (et) {
+		case NOTEQUALPWD:
 			IO.println("비밀번호가 일치하지 않습니다. 비밀번호 수정에 실패하였습니다.");
+			break;
+		case FAIL:
+			IO.println("비밀번호 수정에 실패하였습니다.");
+			break;
+		case SUCCESS:
+			IO.println("비밀번호가 수정되었습니다.");
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + et);
 		}
 	}
 
 	private void modifyEmail() {
-		this.umc.getUser().setEmail(IO.getString("이메일 : "));
-		IO.println("이메일이 수정되었습니다.");
+		UserService us = new UserService();
+		
+		String newEmail = IO.getString("이메일 : ");
+		ErrorType et = us.modifyEmail(this.umc.getUser(), newEmail);
+		
+		switch (et) {
+		case FAIL:
+			IO.println("이메일 수정에 실패하였습니다.");
+			break;
+		case SUCCESS:
+			IO.println("이메일이 수정되었습니다.");
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + et);
+		}
 	}
 
 	private void modifyPhoneNumber() {
-		this.umc.getUser().setPhoneNumber(IO.getString("전화번호 : "));
-		IO.println("전화번호가 수정되었습니다.");
+UserService us = new UserService();
+		
+		String newPhoneNumber = IO.getString("전화번호 : ");
+		ErrorType et = us.modifyPhoneNumber(this.umc.getUser(), newPhoneNumber);
+		
+		switch (et) {
+		case FAIL:
+			IO.println("전화번호 수정에 실패하였습니다.");
+			break;
+		case SUCCESS:
+			IO.println("전화번호가 수정되었습니다.");
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + et);
+		}
 	}
 
 	private void resign() {
 		if (!this.checkAuthority())
 			return;
-		
+
 		AccountController ac = new AccountController();
 		if (ac.resign(this.umc.getUser()))
 			this.umc.setUser(null);

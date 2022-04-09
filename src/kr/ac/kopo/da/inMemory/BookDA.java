@@ -30,7 +30,8 @@ public class BookDA implements MapDA<String, Book> {
 
 	@Override
 	public boolean add(String k, Book v) {
-		return BOOKMAP.put(k, v) == null;
+		BOOKMAP.put(k, v);
+		return true;
 	}
 
 	@Override

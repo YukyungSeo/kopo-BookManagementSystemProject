@@ -22,7 +22,8 @@ public class UserDA implements MapDA<String, User> {
 
 	@Override
 	public boolean add(String k, User v) {
-		return USERMAP.put(k, v) == null;
+		USERMAP.put(k, v);
+		return true;
 	}
 
 	@Override

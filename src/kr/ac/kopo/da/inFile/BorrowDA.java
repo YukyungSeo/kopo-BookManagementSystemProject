@@ -29,9 +29,8 @@ public class BorrowDA implements MapDA<String, Borrow> {
 
 	@Override
 	public boolean add(String k, Borrow v) {
-		boolean bool1 = BorrowDA.BORROWMAP.put(k, v) == null;
-		boolean bool2 = FileReadWrite.write(dbFilename, BorrowDA.BORROWMAP);
-		return bool1 && bool2;
+		BorrowDA.BORROWMAP.put(k, v);
+		return FileReadWrite.write(dbFilename, BorrowDA.BORROWMAP);
 	}
 
 	@Override

@@ -26,7 +26,8 @@ public class BorrowDA implements MapDA<String, Borrow> {
 
 	@Override
 	public boolean add(String k, Borrow v) {
-		return BORROWMAP.put(k, v) == null;
+		BORROWMAP.put(k, v);
+		return true;
 	}
 
 	@Override

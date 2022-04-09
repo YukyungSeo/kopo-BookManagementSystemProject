@@ -33,9 +33,8 @@ public class BookDA implements MapDA<String, Book> {
 
 	@Override
 	public boolean add(String k, Book v) {
-		boolean bool1 = BOOKMAP.put(k, v) == null;
-		boolean bool2 = FileReadWrite.write(dbFilename, BookDA.BOOKMAP);
-		return bool1 && bool2;
+		BOOKMAP.put(k, v);
+		return FileReadWrite.write(dbFilename, BookDA.BOOKMAP);
 	}
 
 	@Override

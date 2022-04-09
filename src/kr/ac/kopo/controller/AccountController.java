@@ -68,7 +68,7 @@ public class AccountController implements Controller {
 		String pwd = IO.getString("패스워드 : ");
 
 		UserService us = new UserService();
-		User user = us.isUser(id, pwd);
+		User user = us.getUser(id, pwd);
 		if (user == null) {
 			IO.println("입력하신 정보가 맞지 않습니다.");
 			return null;

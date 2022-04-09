@@ -7,7 +7,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 
 	@Override
 	public void process() {
-		
+
 		PBU.boundaryOfMenuStart();
 		IO.println(" < 관리자 page - 회원 관리 page 입니다. >");
 		int selection = IO.getInt("항목을 선택하세요(1.회원등록 2.회원삭제 3.회원검색 4.관리자승인 5.이전메뉴) : ");
@@ -47,10 +47,18 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		int num = IO.getInt("삭제하실 회원 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
 			String id = IO.getString((i + 1) + "번째 아이디 : ");
-			if(!us.containID(id))
+			ErrorType et = us.removeUser(id);
+
+			switch (et) {
+			case NOEXIST :
 				IO.println("해당 아이디가 존재하지 않습니다.");
-			//TODO resign으로 바꾸기
-			us.removeUser(id);
+				break;
+			case NOERROR:
+				IO.println("[아이디:" + id+ "] 회원이 삭제되었습니다.");
+				break;
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + et);
+			}
 		}
 	}
 

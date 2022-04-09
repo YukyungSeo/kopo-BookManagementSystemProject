@@ -29,7 +29,7 @@ public class UserService {
 		return ErrorType.NOERROR;
 	}
 
-	public User isUser(String id, String pwd) {
+	public User getUser(String id, String pwd) {
 		User user = this.getUser(id);
 		if (user != null && user.getPassword().equals(pwd))
 			return user;
@@ -40,19 +40,21 @@ public class UserService {
 		return this.getUser(id) != null;
 	}
 
-	public User removeUser(User e) {
+	public ErrorType removeUser(User e) {
 		return this.removeUser(e.getId());
 	}
 
-	public User removeUser(String id) {
-		return uda.remove(id);
+	public ErrorType removeUser(String id) {
+		if(!this.containID(id))
+			return ErrorType.NOEXIST;
+		return uda.remove(id) != null ? ErrorType.NOERROR : null;		
 	}
 
 	public ArrayList<User> searchUser(String value) {
 		return uda.getList(value);
 	}
 
-	public User getUser(String id) {
+	private User getUser(String id) {
 		return uda.get(id);
 	}
 

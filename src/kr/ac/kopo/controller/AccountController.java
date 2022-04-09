@@ -3,6 +3,7 @@ package kr.ac.kopo.controller;
 import kr.ac.kopo.model.Manager;
 import kr.ac.kopo.model.User;
 import kr.ac.kopo.service.UserService;
+import kr.ac.kopo.type.ErrorType;
 
 public class AccountController implements Controller {
 
@@ -91,6 +92,9 @@ public class AccountController implements Controller {
 		switch (et) {
 		case NOTEXIST:
 			IO.println("해당 회원이 존재하지 않습니다.");
+			return false;
+		case BORROWED:
+			IO.println("대여 중인 도서가 있습니다. 탈퇴에 실패하였습니다.");
 			return false;
 		case FAIL:
 			IO.println("탈퇴에 실패하였습니다.");

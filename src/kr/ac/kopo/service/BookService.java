@@ -2,9 +2,9 @@ package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.controller.ErrorType;
 import kr.ac.kopo.da.inFile.BookDA;
 import kr.ac.kopo.model.Book;
+import kr.ac.kopo.type.ErrorType;
 
 public class BookService {
 

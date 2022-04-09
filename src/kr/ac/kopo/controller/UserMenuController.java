@@ -3,6 +3,7 @@ package kr.ac.kopo.controller;
 import kr.ac.kopo.model.User;
 import kr.ac.kopo.service.BookService;
 import kr.ac.kopo.service.BorrowService;
+import kr.ac.kopo.type.ErrorType;
 import kr.ac.kopo.util.PrintListUtil;
 
 public class UserMenuController implements MenuController {

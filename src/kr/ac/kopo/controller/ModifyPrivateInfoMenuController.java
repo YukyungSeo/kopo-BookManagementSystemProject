@@ -1,6 +1,7 @@
 package kr.ac.kopo.controller;
 
 import kr.ac.kopo.service.UserService;
+import kr.ac.kopo.type.ErrorType;
 
 public class ModifyPrivateInfoMenuController implements MenuController {
 

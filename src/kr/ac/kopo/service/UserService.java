@@ -2,9 +2,9 @@ package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
-import kr.ac.kopo.controller.ErrorType;
 import kr.ac.kopo.da.inFile.UserDA;
 import kr.ac.kopo.model.User;
+import kr.ac.kopo.type.ErrorType;
 
 public class UserService {
 
@@ -63,6 +63,11 @@ public class UserService {
 	public ErrorType removeUser(String id) {
 		if (!this.containID(id))
 			return ErrorType.NOTEXIST;
+		
+		BorrowService bs = new BorrowService();
+		if(bs.searchBorrowWithID(id).size() != 0)
+			return ErrorType.BORROWED;
+		
 		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 

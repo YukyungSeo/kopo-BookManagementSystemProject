@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import kr.ac.kopo.controller.ErrorType;
 import kr.ac.kopo.da.inFile.BookDA;
 import kr.ac.kopo.da.inFile.BorrowDA;
 import kr.ac.kopo.model.Book;
 import kr.ac.kopo.model.Borrow;
+import kr.ac.kopo.type.ErrorType;
 
 public class BorrowService {
 

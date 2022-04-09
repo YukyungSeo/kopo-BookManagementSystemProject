@@ -80,30 +80,42 @@ public class UserMenuController implements MenuController {
 
 		switch (et) {
 		case NOEXIST:
-			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
+			IO.println("해당 ISBN을 가진 도서는 존재하지않습니다. ISBN을 확인해주세요.");
 			break;
 		case BORROWED:
 			IO.println("이미 대여 중인 도서입니다. 대여에 실패하셨습니다.");
 			break;
 		case NOERROR:
-			BookService bookservice = new BookService();
-			IO.println("[ " + isbn + " : " + bookservice.getBook(isbn).getTitle() + " ] 도서를 대여하셨습니다.");
+			IO.println("[ " + isbn + ":" + bs.getBorrow(isbn).getTitle() + " ] 도서가 대여되었습니다.");
 			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + et);
 		}
 
-		PrintListUtil pu = new PrintListUtil();
-		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
+		this.printBorrowList(bs);
 	}
 
 	protected void returnBook() {
 		BorrowService bs = new BorrowService();
 
 		String isbn = IO.getString("도서 ISBN : ");
-		if (!bs.returnBook(isbn, user.getId())) {
-			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
+		ErrorType et = bs.returnBook(isbn, user.getId());
+		switch (et) {
+		case NOEXIST:
+			IO.println("해당 ISBN을 가진 도서를 대여하지 않았습니다. ISBN을 확인해주세요.");
+			break;
+		case NOERROR:
+			BookService bookservice = new BookService();
+			IO.println("[ " + isbn + ":" + bookservice.getBook(isbn).getTitle() + " ] 도서가 반납되었습니다.");
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + et);
 		}
+
+		this.printBorrowList(bs);
+	}
+
+	private void printBorrowList(BorrowService bs) {
 		PrintListUtil pu = new PrintListUtil();
 		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
 	}

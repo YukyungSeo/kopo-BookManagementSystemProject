@@ -39,16 +39,16 @@ public class BorrowService {
 		return ErrorType.NOERROR;
 	}
 
-	public boolean returnBook(String isbn, String userId) {
+	public ErrorType returnBook(String isbn, String userId) {
 		BookDA bookda = new BookDA();
 		BorrowDA bda = new BorrowDA();
 		if (!bda.containISBN(isbn)) {
-			return false;
+			return ErrorType.NOEXIST;
 		}
 
 		Borrow borrow = bda.get(isbn);
 		if (!borrow.getUserId().equals(userId)) {
-			return false;
+			return ErrorType.NOEXIST;
 		}
 
 		Book book = bookda.get(isbn);
@@ -56,16 +56,21 @@ public class BorrowService {
 		bookda.saveData();
 
 		bda.remove(isbn);
-		return true;
+		return ErrorType.NOERROR;
 	}
 
 	public ArrayList<Borrow> searchBorrow(String Value) {
 		BorrowDA bda = new BorrowDA();
 		return bda.getList(Value);
 	}
-	
+
 	public ArrayList<Borrow> searchBorrowWithID(String userId) {
 		BorrowDA bda = new BorrowDA();
 		return bda.getListWithID(userId);
+	}
+
+	public Borrow getBorrow(String isbn) {
+		BorrowDA bda = new BorrowDA();
+		return bda.get(isbn);
 	}
 }

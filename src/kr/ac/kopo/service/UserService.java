@@ -28,6 +28,13 @@ public class UserService {
 		return uda.add(newUser.getId(), newUser) ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
+	public boolean isUser(String id, String pwd) {
+		User user = this.getUser(id);
+		if (user != null && user.getPassword().equals(pwd))
+			return true;
+		return false;
+	}
+	
 	public User getUser(String id, String pwd) {
 		User user = this.getUser(id);
 		if (user != null && user.getPassword().equals(pwd))

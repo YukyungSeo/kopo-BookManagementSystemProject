@@ -13,7 +13,7 @@ public class ManagerMenuController extends UserMenuController {
 
 		PBU.boundaryOfMenuStart();
 		int selection = -1;
-		loop: while (selection != 7) {
+		loop: while (super.getUser() != null && selection != 7) {
 			IO.println(" < 관리자 page 입니다. >");
 			selection = IO.getInt("항목을 선택하세요(1.마이페이지 2.도서검색 3.도서대여 4.도서반납 5.회원관리 6.도서관리 7.로그아웃) : ");
 			switch (selection) {

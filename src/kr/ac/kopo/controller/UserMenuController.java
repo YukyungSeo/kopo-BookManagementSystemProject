@@ -27,7 +27,7 @@ public class UserMenuController implements MenuController {
 
 		PBU.boundaryOfMenuStart();
 		int selection = -1;
-		loop: while (selection != 5) {
+		loop: while (this.user != null && selection != 5) {
 			IO.println(" < 일반회원 page 입니다. >");
 			selection = IO.getInt("항목을 선택하세요(1.마이페이지 2.도서검색 3.도서대여 4.도서반납 5.로그아웃) : ");
 			switch (selection) {
@@ -60,8 +60,14 @@ public class UserMenuController implements MenuController {
 		BorrowService bs = new BorrowService();
 		PrintListUtil pu = new PrintListUtil();
 
-		pu.printUserInfo(user);
-		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
+		pu.printUserInfo(this.user);
+		pu.printBorrowList(bs.searchBorrowWithID(this.user.getId()));
+		
+		char c = IO.getChar("개인정보를 수정하시겠습까?(y/n) : ");
+		if(c=='y'|| c=='Y') {
+			ModifyPrivateInfoMenuController mpmc = new ModifyPrivateInfoMenuController(this);
+			mpmc.process();
+		}
 	}
 
 	protected void searchBook() {
@@ -76,7 +82,7 @@ public class UserMenuController implements MenuController {
 		BorrowService bs = new BorrowService();
 
 		String isbn = IO.getString("도서 ISBN : ");
-		ErrorType et = bs.borrowBook(isbn, user.getId());
+		ErrorType et = bs.borrowBook(isbn, this.user.getId());
 
 		switch (et) {
 		case NOEXIST:
@@ -102,7 +108,7 @@ public class UserMenuController implements MenuController {
 		BorrowService bs = new BorrowService();
 
 		String isbn = IO.getString("도서 ISBN : ");
-		ErrorType et = bs.returnBook(isbn, user.getId());
+		ErrorType et = bs.returnBook(isbn, this.user.getId());
 		switch (et) {
 		case NOEXIST:
 			IO.println("해당 ISBN을 가진 도서를 대여하지 않았습니다. ISBN을 확인해주세요.");
@@ -123,7 +129,7 @@ public class UserMenuController implements MenuController {
 
 	private void printBorrowList(BorrowService bs) {
 		PrintListUtil pu = new PrintListUtil();
-		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
+		pu.printBorrowList(bs.searchBorrowWithID(this.user.getId()));
 	}
 
 }

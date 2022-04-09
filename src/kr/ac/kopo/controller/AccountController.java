@@ -68,7 +68,7 @@ public class AccountController implements Controller {
 	}
 
 	protected User login() {
-		
+
 		String id = IO.getString("아이디 : ");
 		String pwd = IO.getString("패스워드 : ");
 
@@ -84,20 +84,22 @@ public class AccountController implements Controller {
 
 	}
 
-	// TODO 회원탈퇴
-//	protected User resign() {
-//		String id = IO.getString("아이디 : ");
-//		String pwd = IO.getString("패스워드 : ");
-//
-//		UserService us = new UserService();
-//		User user = us.removeUser(id, pwd);
-//
-//		if (user == null) {
-//			IO.println("입력하신 정보가 맞지 않습니다.");
-//			return null;
-//		}
-//
-//		return user;
-//	}
+	protected boolean resign(User user) {
+		UserService us = new UserService();
+		ErrorType et = us.removeUser(user);
 
+		switch (et) {
+		case NOEXIST:
+			IO.println("해당 회원이 존재하지 않습니다.");
+			return false;
+		case FAIL:
+			IO.println("탈퇴에 실패하였습니다.");
+			return false;
+		case SUCCESS:
+			IO.println("탈퇴되었습니다. 다시 뵙기를 바랍니다 :)");
+			return true;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + et);
+		}
+	}
 }

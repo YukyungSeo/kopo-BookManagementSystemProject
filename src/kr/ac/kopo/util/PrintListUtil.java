@@ -71,7 +71,6 @@ public class PrintListUtil {
 		su.println("< 대여 목록 >");
 		su.println("--------------------------------------------------------------------------------------------");
 		su.println("\tISBN\t도서제목\t\t\t대여자ID\t대여일\t반납일");
-		// TODO:String.format으로 열간격 맟추기
 		for (Borrow borrow : list) {
 			bc.setTime(borrow.getBorrowDate());
 			rc.setTime(borrow.getReturnDate());

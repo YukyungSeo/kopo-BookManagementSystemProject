@@ -2,7 +2,7 @@ package kr.ac.kopo.util;
 
 public class PrintBoundaryUtil {
 	
-	ScannerIOUtil su;
+	private ScannerIOUtil su;
 
 	public PrintBoundaryUtil() {
 		super();

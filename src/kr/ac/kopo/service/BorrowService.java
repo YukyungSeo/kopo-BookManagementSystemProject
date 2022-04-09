@@ -14,10 +14,10 @@ import kr.ac.kopo.model.Borrow;
 
 public class BorrowService {
 
+	private BookDA bookda = new BookDA();
+	private BorrowDA bda = new BorrowDA();
+	
 	public ErrorType borrowBook(String isbn, String userId) {
-		// TODO 안되는 이유 각각 출력 (예외처리)
-		BookDA bookda = new BookDA();
-		BorrowDA bda = new BorrowDA();
 
 		if (!bookda.containISBN(isbn)) { // 해당 ISBN이 없어면 false
 			return ErrorType.NOEXIST;
@@ -40,8 +40,7 @@ public class BorrowService {
 	}
 
 	public ErrorType returnBook(String isbn, String userId) {
-		BookDA bookda = new BookDA();
-		BorrowDA bda = new BorrowDA();
+
 		if (!bda.containISBN(isbn)) {
 			return ErrorType.NOEXIST;
 		}
@@ -63,17 +62,14 @@ public class BorrowService {
 	}
 
 	public ArrayList<Borrow> searchBorrow(String Value) {
-		BorrowDA bda = new BorrowDA();
 		return bda.getList(Value);
 	}
 
 	public ArrayList<Borrow> searchBorrowWithID(String userId) {
-		BorrowDA bda = new BorrowDA();
 		return bda.getListWithID(userId);
 	}
 
 	public Borrow getBorrow(String isbn) {
-		BorrowDA bda = new BorrowDA();
 		return bda.get(isbn);
 	}
 }

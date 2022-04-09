@@ -10,7 +10,7 @@ import kr.ac.kopo.model.User;
 
 public class PrintListUtil {
 
-	ScannerIOUtil su;
+	private ScannerIOUtil su;
 
 	public PrintListUtil() {
 		super();

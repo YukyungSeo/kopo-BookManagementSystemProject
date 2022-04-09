@@ -2,6 +2,8 @@ package kr.ac.kopo.controller;
 
 import kr.ac.kopo.model.Book;
 import kr.ac.kopo.service.BookService;
+import kr.ac.kopo.service.BorrowService;
+import kr.ac.kopo.util.PrintListUtil;
 
 public class BookManagementMenuContorller implements MenuController {
 
@@ -9,7 +11,7 @@ public class BookManagementMenuContorller implements MenuController {
 	public void process() {
 		PBU.boundaryOfMenuStart();
 		IO.println(" < 관리자 page - 도서 관리 page 입니다. >");
-		int selection = IO.getInt("항목을 선택하세요(1.도서등록 2.도서삭제 3.이전메뉴) : ");
+		int selection = IO.getInt("항목을 선택하세요(1.도서등록 2.도서삭제 3. 대여현황 4.이전메뉴) : ");
 		switch (selection) {
 		case 1:
 			this.addBooks();
@@ -18,6 +20,9 @@ public class BookManagementMenuContorller implements MenuController {
 			this.removeBooks();
 			break;
 		case 3:
+			this.borrowStatus();
+			break;
+		case 4:
 			break;
 		default:
 			IO.println("항목이 존재하지 않습니다. 이전메뉴로 돌아갑니다.");
@@ -107,4 +112,9 @@ public class BookManagementMenuContorller implements MenuController {
 		}
 	}
 
+	private void borrowStatus() {
+		PrintListUtil pu = new PrintListUtil();
+		BorrowService bs = new BorrowService();
+		pu.printBorrowList(bs.searchBorrow(""));
+	}
 }

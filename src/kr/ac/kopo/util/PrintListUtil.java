@@ -70,13 +70,13 @@ public class PrintListUtil {
 
 		su.println("< 대여 목록 >");
 		su.println("--------------------------------------------------------------------------------------------");
-		su.println("\tISBN\t도서제목\t\t\t대여자ID\t대여일\t반납일");
+		su.println("\tISBN\t도서제목\t\t\t대여자ID\t대여일\t\t반납일");
 		for (Borrow borrow : list) {
 			bc.setTime(borrow.getBorrowDate());
 			rc.setTime(borrow.getReturnDate());
 
 			su.println("--------------------------------------------------------------------------------------------");
-			su.println(String.format("\t%s\t%s\t%s\t%s\t%s", borrow.getIsbn(), borrow.getTitle(), borrow.getUserId(),
+			su.println(String.format("\t%s\t%-15s\t%s\t%s\t%s", borrow.getIsbn(), borrow.getTitle(), borrow.getUserId(),
 					sdf.format(bc.getTime()), sdf.format(rc.getTime())));
 		}
 		su.println("--------------------------------------------------------------------------------------------");

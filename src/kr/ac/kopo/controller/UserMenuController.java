@@ -83,7 +83,10 @@ public class UserMenuController implements MenuController {
 			IO.println("해당 ISBN을 가진 도서는 존재하지않습니다. ISBN을 확인해주세요.");
 			break;
 		case BORROWED:
-			IO.println("이미 대여 중인 도서입니다. 대여에 실패하셨습니다.");
+			IO.println("이미 대여 중인 도서입니다. 대여에 실패하였습니다.");
+			break;
+		case FAIL:
+			IO.println("대여에 실패하였습니다.");
 			break;
 		case SUCCESS:
 			IO.println("[ " + isbn + ":" + bs.getBorrow(isbn).getTitle() + " ] 도서가 대여되었습니다.");
@@ -103,6 +106,9 @@ public class UserMenuController implements MenuController {
 		switch (et) {
 		case NOEXIST:
 			IO.println("해당 ISBN을 가진 도서를 대여하지 않았습니다. ISBN을 확인해주세요.");
+			break;
+		case FAIL:
+			IO.println("도서반납에 실패하셨습니다.");
 			break;
 		case SUCCESS:
 			BookService bookservice = new BookService();

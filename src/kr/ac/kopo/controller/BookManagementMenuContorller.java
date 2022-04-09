@@ -44,9 +44,14 @@ public class BookManagementMenuContorller implements MenuController {
 
 		ErrorType et = bs.addBook(new Book(isbn, title, author, publisher, isBorrow));
 
-		if (et.equals(ErrorType.SUCCESS)) {
+		switch (et) {
+		case FAIL:
+			IO.println("도서등록을 실패하였습니다");
+			break;
+		case SUCCESS:
 			IO.println("[ " + isbn + ":" + title + " ] 도서를 등록하였습니다.");
-		} else {
+			break;
+		default:
 			throw new IllegalArgumentException("Unexpected value: " + et);
 		}
 
@@ -82,21 +87,23 @@ public class BookManagementMenuContorller implements MenuController {
 		for (int i = 0; i < num; i++) {
 			String isbn = IO.getString((i + 1) + "번째 ISBN : ");
 			ErrorType et = bs.removeBook(isbn);
-			
+
 			switch (et) {
-			case NOEXIST: 
+			case NOEXIST:
 				IO.println("해당 ISBN을 가진 도서는 존재하지 않습니다.");
 				break;
 			case BORROWED:
-				IO.println("현재 대여 중인 도서입니다. 도서삭제에 실패하였습니다.");
+				IO.println("현재 대여 중인 도서입니다. 도서삭제를 실패하였습니다.");
 				break;
+			case FAIL:
+				IO.println("도서삭제를 실패하였습니다.");
 			case SUCCESS:
 				IO.println("[ " + isbn + " ] 도서가 삭제되었습니다.");
 				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + et);
 			}
-				
+
 		}
 	}
 

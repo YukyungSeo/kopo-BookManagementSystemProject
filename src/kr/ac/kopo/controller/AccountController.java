@@ -32,6 +32,10 @@ public class AccountController implements Controller {
 			break;
 		case OUTOFFORM:
 			IO.println("비밀번호가 공백입니다. 회원가입에 실패하셨습니다.");
+			break;
+		case FAIL:
+			IO.println("회원가입에 실패하셨습니다.");
+			break;
 		case SUCCESS:
 			IO.println("회원가입이 완료되었습니다.");
 			break;

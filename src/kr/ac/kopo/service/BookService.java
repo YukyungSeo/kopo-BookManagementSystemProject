@@ -44,7 +44,7 @@ public class BookService {
 			return ErrorType.BORROWED;
 
 		// 도서 삭제를 성공했을 경우와 실패하여 null값이 반환되는 경우
-		return bda.remove(isbn) != null ? ErrorType.SUCCESS : ErrorType.NULL;
+		return bda.remove(isbn) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
 	public ArrayList<Book> searchBook(String value) {

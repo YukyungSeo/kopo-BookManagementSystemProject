@@ -46,7 +46,7 @@ public class UserService {
 	public ErrorType removeUser(String id) {
 		if(!this.containID(id))
 			return ErrorType.NOEXIST;
-		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.NULL;		
+		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;		
 	}
 
 	public ArrayList<User> searchUser(String value) {

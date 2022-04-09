@@ -35,8 +35,8 @@ public class BorrowService {
 		c.setTime(new Date());
 		c.add(Calendar.DATE, 7); // 7일을 더해준다. 대여일 7일
 
-		bda.add(isbn, new Borrow(isbn, book.getTitle(), userId, new Date(), c.getTime()));
-		return ErrorType.SUCCESS;
+		boolean bool = bda.add(isbn, new Borrow(isbn, book.getTitle(), userId, new Date(), c.getTime()));
+		return bool ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
 	public ErrorType returnBook(String isbn, String userId) {
@@ -55,8 +55,7 @@ public class BorrowService {
 		book.setBorrow(false);
 		bookda.saveData();
 
-		bda.remove(isbn);
-		return ErrorType.SUCCESS;
+		return bda.remove(isbn) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 	
 	public boolean containISBN(String isbn) {

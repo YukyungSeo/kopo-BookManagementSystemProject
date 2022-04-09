@@ -53,6 +53,8 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 			case NOEXIST :
 				IO.println("해당 아이디가 존재하지 않습니다.");
 				break;
+			case FAIL:
+				IO.println("회원삭제에 실패하였습니다.");
 			case SUCCESS:
 				IO.println("[ " + id+ " ] 회원이 삭제되었습니다.");
 				break;

@@ -20,11 +20,8 @@ public class UserService {
 		return ErrorType.SUCCESS;
 	}
 
-	public ErrorType addUser(User newUser, String pwd2) {
-		if (!newUser.getPassword().equals(pwd2)) {
-			return ErrorType.NOTEQUALPWD;
-		}
-		return uda.add(newUser.getId(), newUser) ? ErrorType.SUCCESS : ErrorType.FAIL;
+	public boolean containID(String id) {
+		return this.getUser(id) != null;
 	}
 
 	public boolean isUser(String id, String pwd) {
@@ -32,35 +29,6 @@ public class UserService {
 		if (user != null && user.getPassword().equals(pwd))
 			return true;
 		return false;
-	}
-
-	public User getUser(String id, String pwd) {
-		User user = this.getUser(id);
-		if (user != null && user.getPassword().equals(pwd))
-			return user;
-		return null;
-	}
-
-	public boolean containID(String id) {
-		return this.getUser(id) != null;
-	}
-
-	public ErrorType removeUser(User e) {
-		return this.removeUser(e.getId());
-	}
-
-	public ErrorType removeUser(String id) {
-		if (!this.containID(id))
-			return ErrorType.NOTEXIST;
-		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
-	}
-
-	public ArrayList<User> searchUser(String value) {
-		return uda.getList(value);
-	}
-
-	private User getUser(String id) {
-		return uda.get(id);
 	}
 
 	public ErrorType modifyPwd(User user, String nerPwd1, String newPwd2) {
@@ -79,5 +47,37 @@ public class UserService {
 	public ErrorType modifyPhoneNumber(User user, String newPhoneNumber) {
 		user.setPhoneNumber(newPhoneNumber);
 		return uda.add(user.getId(), user) ? ErrorType.SUCCESS : ErrorType.FAIL;
+	}
+
+	public ErrorType addUser(User newUser, String pwd2) {
+		if (!newUser.getPassword().equals(pwd2)) {
+			return ErrorType.NOTEQUALPWD;
+		}
+		return uda.add(newUser.getId(), newUser) ? ErrorType.SUCCESS : ErrorType.FAIL;
+	}
+
+	public ErrorType removeUser(User e) {
+		return this.removeUser(e.getId());
+	}
+
+	public ErrorType removeUser(String id) {
+		if (!this.containID(id))
+			return ErrorType.NOTEXIST;
+		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
+	}
+
+	private User getUser(String id) {
+		return uda.get(id);
+	}
+
+	public User getUser(String id, String pwd) {
+		User user = this.getUser(id);
+		if (user != null && user.getPassword().equals(pwd))
+			return user;
+		return null;
+	}
+
+	public ArrayList<User> searchUser(String value) {
+		return uda.getList(value);
 	}
 }

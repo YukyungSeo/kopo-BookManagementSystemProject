@@ -14,7 +14,7 @@ public class BorrowService {
 
 	private BookDA bookda = new BookDA();
 	private BorrowDA bda = new BorrowDA();
-	
+
 	public ErrorType borrowBook(String isbn, String userId) {
 
 		if (!bookda.containISBN(isbn)) { // 해당 ISBN이 없어면 false
@@ -54,9 +54,13 @@ public class BorrowService {
 
 		return bda.remove(isbn) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
-	
+
 	public boolean containISBN(String isbn) {
 		return this.getBorrow(isbn) != null;
+	}
+
+	public Borrow getBorrow(String isbn) {
+		return bda.get(isbn);
 	}
 
 	public ArrayList<Borrow> searchBorrow(String Value) {
@@ -65,9 +69,5 @@ public class BorrowService {
 
 	public ArrayList<Borrow> searchBorrowWithID(String userId) {
 		return bda.getListWithID(userId);
-	}
-
-	public Borrow getBorrow(String isbn) {
-		return bda.get(isbn);
 	}
 }

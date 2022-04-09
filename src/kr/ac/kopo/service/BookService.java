@@ -14,10 +14,6 @@ public class BookService {
 		super();
 	}
 
-	public ErrorType addBook(Book e) {
-		return bda.add(e.getIsbn(), e) ? ErrorType.SUCCESS : ErrorType.FAIL;
-	}
-
 	public ErrorType checkISBN(String isbn) {
 		if (isbn.equals(""))
 			return ErrorType.OUTOFFORM;
@@ -26,6 +22,10 @@ public class BookService {
 
 	public boolean containISBN(String isbn) {
 		return this.getBook(isbn) != null;
+	}
+
+	public ErrorType addBook(Book e) {
+		return bda.add(e.getIsbn(), e) ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
 	public ErrorType removeBook(Book e) {
@@ -46,12 +46,12 @@ public class BookService {
 		return bda.remove(isbn) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
-	public ArrayList<Book> searchBook(String value) {
-		return bda.getList(value);
-	}
-
 	public Book getBook(String isbn) {
 		return bda.get(isbn);
+	}
+
+	public ArrayList<Book> searchBook(String value) {
+		return bda.getList(value);
 	}
 
 }

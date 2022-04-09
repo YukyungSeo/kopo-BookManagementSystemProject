@@ -18,15 +18,14 @@ public class UserService {
 		else if (containID(id))
 			return ErrorType.EXIST;
 
-		return ErrorType.NOERROR;
+		return ErrorType.SUCCESS;
 	}
 
-	public ErrorType signup(User newUser, String pwd2) {
+	public ErrorType addUser(User newUser, String pwd2) {
 		if (!newUser.getPassword().equals(pwd2)) {
 			return ErrorType.NOTEQUALPWD;
 		}
-		uda.add(newUser.getId(), newUser);
-		return ErrorType.NOERROR;
+		return uda.add(newUser.getId(), newUser) ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
 	public User getUser(String id, String pwd) {
@@ -47,7 +46,7 @@ public class UserService {
 	public ErrorType removeUser(String id) {
 		if(!this.containID(id))
 			return ErrorType.NOEXIST;
-		return uda.remove(id) != null ? ErrorType.NOERROR : null;		
+		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.NULL;		
 	}
 
 	public ArrayList<User> searchUser(String value) {

@@ -13,10 +13,10 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		int selection = IO.getInt("항목을 선택하세요(1.회원등록 2.회원삭제 3.회원검색 4.관리자승인 5.이전메뉴) : ");
 		switch (selection) {
 		case 1:
-			this.addUser();
+			this.addUsers();
 			break;
 		case 2:
-			this.removeUser();
+			this.removeUsers();
 			break;
 		case 3:
 			this.searchUser();
@@ -33,7 +33,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		PBU.boundaryOfMenuEnd();
 	}
 
-	private void addUser() {
+	private void addUsers() {
 		AccountController ac = new AccountController();
 		int num = IO.getInt("등록하실 회원 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
@@ -42,7 +42,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		}
 	}
 
-	private void removeUser() {
+	private void removeUsers() {
 		UserService us = new UserService();
 		int num = IO.getInt("삭제하실 회원 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
@@ -53,8 +53,8 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 			case NOEXIST :
 				IO.println("해당 아이디가 존재하지 않습니다.");
 				break;
-			case NOERROR:
-				IO.println("[아이디:" + id+ "] 회원이 삭제되었습니다.");
+			case SUCCESS:
+				IO.println("[ " + id+ " ] 회원이 삭제되었습니다.");
 				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + et);

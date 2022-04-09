@@ -12,10 +12,10 @@ public class BookManagementMenuContorller implements MenuController {
 		int selection = IO.getInt("항목을 선택하세요(1.도서등록 2.도서삭제 3.이전메뉴) : ");
 		switch (selection) {
 		case 1:
-			this.addBook();
+			this.addBooks();
 			break;
 		case 2:
-			this.removeBook();
+			this.removeBooks();
 			break;
 		case 3:
 			break;
@@ -26,46 +26,77 @@ public class BookManagementMenuContorller implements MenuController {
 		PBU.boundaryOfMenuEnd();
 	}
 
-	private void addBook() {
-		BookService bs = new BookService();
-
+	private void addBooks() {
 		int num = IO.getInt("등록하실 도서 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
 			IO.println((i + 1) + "번째 도서 등록");
-			// TODO: 각 입력 조건이 맞는지 확인(ex.제목 저자 출판사가 ""일 경우 등)
-			String isbn = this.getIsbn(bs);
-			String title = IO.getString("제목 : ");
-			String author = IO.getString("저자 : ");
-			String publisher = IO.getString("출판사 : ");
-			boolean isBorrow = false;
-
-			Book book = new Book(isbn, title, author, publisher, isBorrow);
-
-			if (bs.addBook(book))
-				IO.println("[" + isbn + ":" + title + "] 도서를 추가하였습니다.");
+			this.addBook();
 		}
+	}
+
+	private void addBook() {
+		BookService bs = new BookService();
+		String isbn = this.getIsbn(bs);
+		String title = IO.getString("제목 : ");
+		String author = IO.getString("저자 : ");
+		String publisher = IO.getString("출판사 : ");
+		boolean isBorrow = false;
+
+		ErrorType et = bs.addBook(new Book(isbn, title, author, publisher, isBorrow));
+
+		if (et.equals(ErrorType.SUCCESS)) {
+			IO.println("[ " + isbn + ":" + title + " ] 도서를 등록하였습니다.");
+		} else {
+			throw new IllegalArgumentException("Unexpected value: " + et);
+		}
+
 	}
 
 	private String getIsbn(BookService bs) {
 		String isbn = null;
-		while (true) {
+		loop: while (true) {
 			isbn = IO.getString("ISBN : ");
+			ErrorType et = bs.checkISBN(isbn);
 
-			if (!bs.containISBN(isbn))
+			switch (et) {
+			case OUTOFFORM:
+				IO.println("ISBN이 공백입니다. 다시 입력해주세요.");
 				break;
+			case EXIST:
+				IO.println("이미 존재하는 ISBN입니다. 다시 입력해주세요.");
+				break;
+			case SUCCESS:
+				break loop;
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + et);
+			}
 
-			IO.println("해당 ISBN은 이미 존재합니다. 다시 입력해주세요.");
 		}
 		return isbn;
+
 	}
 
-	private void removeBook() {
+	private void removeBooks() {
 		BookService bs = new BookService();
 		int num = IO.getInt("삭제하실 도서 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
-			String id = IO.getString((i + 1) + "번째 ISBN : ");
-			if (bs.removeBook(id) == null)
+			String isbn = IO.getString((i + 1) + "번째 ISBN : ");
+			ErrorType et = bs.removeBook(isbn);
+			
+			switch (et) {
+			case NOEXIST: 
 				IO.println("해당 ISBN을 가진 도서는 존재하지 않습니다.");
+				break;
+			case BORROWED:
+				IO.println("현재 대여 중인 도서입니다. 도서삭제에 실패하였습니다.");
+				break;
+			case SUCCESS:
+				IO.println("[ " + isbn + " ] 도서가 삭제되었습니다.");
+				break;
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + et);
+			}
+				
 		}
 	}
 

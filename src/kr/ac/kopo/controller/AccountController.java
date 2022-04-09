@@ -21,9 +21,9 @@ public class AccountController implements Controller {
 
 		ErrorType et = null;
 		if (c == 'y' || c == 'Y') {
-			et = us.signup(new Manager(id, pwd, name, birth, email, phoneNumber), pwd2);
+			et = us.addUser(new Manager(id, pwd, name, birth, email, phoneNumber), pwd2);
 		} else {
-			et = us.signup(new User(id, pwd, name, birth, email, phoneNumber), pwd2);
+			et = us.addUser(new User(id, pwd, name, birth, email, phoneNumber), pwd2);
 		}
 
 		switch (et) {
@@ -32,7 +32,7 @@ public class AccountController implements Controller {
 			break;
 		case OUTOFFORM:
 			IO.println("비밀번호가 공백입니다. 회원가입에 실패하셨습니다.");
-		case NOERROR:
+		case SUCCESS:
 			IO.println("회원가입이 완료되었습니다.");
 			break;
 		default:
@@ -54,7 +54,7 @@ public class AccountController implements Controller {
 			case EXIST:
 				IO.println("이미 존재하는 아이디입니다. 다시 입력해주세요.");
 				break;
-			case NOERROR:
+			case SUCCESS:
 				break loop;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + et);

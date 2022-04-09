@@ -85,7 +85,7 @@ public class UserMenuController implements MenuController {
 		case BORROWED:
 			IO.println("이미 대여 중인 도서입니다. 대여에 실패하셨습니다.");
 			break;
-		case NOERROR:
+		case SUCCESS:
 			IO.println("[ " + isbn + ":" + bs.getBorrow(isbn).getTitle() + " ] 도서가 대여되었습니다.");
 			break;
 		default:
@@ -104,7 +104,7 @@ public class UserMenuController implements MenuController {
 		case NOEXIST:
 			IO.println("해당 ISBN을 가진 도서를 대여하지 않았습니다. ISBN을 확인해주세요.");
 			break;
-		case NOERROR:
+		case SUCCESS:
 			BookService bookservice = new BookService();
 			IO.println("[ " + isbn + ":" + bookservice.getBook(isbn).getTitle() + " ] 도서가 반납되었습니다.");
 			break;

@@ -36,7 +36,7 @@ public class BorrowService {
 		c.add(Calendar.DATE, 7); // 7일을 더해준다. 대여일 7일
 
 		bda.add(isbn, new Borrow(isbn, book.getTitle(), userId, new Date(), c.getTime()));
-		return ErrorType.NOERROR;
+		return ErrorType.SUCCESS;
 	}
 
 	public ErrorType returnBook(String isbn, String userId) {
@@ -56,7 +56,11 @@ public class BorrowService {
 		bookda.saveData();
 
 		bda.remove(isbn);
-		return ErrorType.NOERROR;
+		return ErrorType.SUCCESS;
+	}
+	
+	public boolean containISBN(String isbn) {
+		return this.getBorrow(isbn) != null;
 	}
 
 	public ArrayList<Borrow> searchBorrow(String Value) {

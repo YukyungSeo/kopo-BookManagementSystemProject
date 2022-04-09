@@ -30,7 +30,7 @@ public class ScannerIOUtil {
 			return sc.nextLine().charAt(0);
 		} catch (Exception e) {
 			println("잘못입력하셨습니다.");
-			return 'z';
+			return '`';
 		}
 	}
 

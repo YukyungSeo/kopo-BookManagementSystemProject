@@ -24,7 +24,7 @@ public class UserMenuController implements MenuController {
 
 	@Override
 	public void process() {
-		
+
 		PBU.boundaryOfMenuStart();
 		int selection = -1;
 		loop: while (selection != 5) {
@@ -61,7 +61,7 @@ public class UserMenuController implements MenuController {
 		PrintListUtil pu = new PrintListUtil();
 
 		pu.printUserInfo(user);
-		pu.printBorrowList(bs.searchBook(user.getId()));
+		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
 	}
 
 	protected void searchBook() {
@@ -76,12 +76,25 @@ public class UserMenuController implements MenuController {
 		BorrowService bs = new BorrowService();
 
 		String isbn = IO.getString("도서 ISBN : ");
-		if (!bs.borrowBook(isbn, user.getId())) {
+		ErrorType et = bs.borrowBook(isbn, user.getId());
+
+		switch (et) {
+		case NOEXIST:
 			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
+			break;
+		case BORROWED:
+			IO.println("이미 대여 중인 도서입니다. 대여에 실패하셨습니다.");
+			break;
+		case NOERROR:
+			BookService bookservice = new BookService();
+			IO.println("[ " + isbn + " : " + bookservice.getBook(isbn).getTitle() + " ] 도서를 대여하셨습니다.");
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + et);
 		}
 
 		PrintListUtil pu = new PrintListUtil();
-		pu.printBorrowList(bs.searchBook(user.getId()));
+		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
 	}
 
 	protected void returnBook() {
@@ -92,7 +105,7 @@ public class UserMenuController implements MenuController {
 			IO.println("잘못 입력하셨습니다. ISBN을 확인해주세요.");
 		}
 		PrintListUtil pu = new PrintListUtil();
-		pu.printBorrowList(bs.searchBook(user.getId()));
+		pu.printBorrowList(bs.searchBorrowWithID(user.getId()));
 	}
 
 }

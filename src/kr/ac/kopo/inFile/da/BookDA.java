@@ -11,11 +11,12 @@ import kr.ac.kopo.util.FileReadWrite;
 public class BookDA implements MapDA<String, Book> {
 
 	private static Map<String, Book> BOOKMAP;
+	private final String dbFilename = "BookData";
 
 	@SuppressWarnings("unchecked")
 	public BookDA() {
 		super();
-		BookDA.BOOKMAP = (Map<String, Book>) FileReadWrite.read("book");
+		BookDA.BOOKMAP = (Map<String, Book>) FileReadWrite.read(dbFilename);
 	}
 
 	public BookDA(Map<String, Book> bookMap) {
@@ -33,14 +34,14 @@ public class BookDA implements MapDA<String, Book> {
 	@Override
 	public boolean add(String k, Book v) {
 		boolean bool = BOOKMAP.put(k, v) == null;
-		FileReadWrite.write("book", BookDA.BOOKMAP);
+		FileReadWrite.write(dbFilename, BookDA.BOOKMAP);
 		return bool;
 	}
 
 	@Override
 	public Book remove(String k) {
 		Book book = BookDA.BOOKMAP.remove(k);
-		FileReadWrite.write("book", BookDA.BOOKMAP);
+		FileReadWrite.write(dbFilename, BookDA.BOOKMAP);
 		return book;
 	}
 
@@ -64,8 +65,9 @@ public class BookDA implements MapDA<String, Book> {
 		return arr;
 	}
 
+	@Override
 	public void saveData() {
-		FileReadWrite.write("book", BookDA.BOOKMAP);
+		FileReadWrite.write(dbFilename, BookDA.BOOKMAP);
 	}
 
 }

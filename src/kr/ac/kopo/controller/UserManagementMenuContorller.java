@@ -38,7 +38,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 		int num = IO.getInt("등록하실 회원 수를 입력하세요 : ");
 		for (int i = 0; i < num; i++) {
 			IO.println((i + 1) + "번째 회원 등록");
-			ac.join();
+			ac.signup();
 		}
 	}
 
@@ -49,6 +49,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 			String id = IO.getString((i + 1) + "번째 아이디 : ");
 			if(!us.containID(id))
 				IO.println("해당 아이디가 존재하지 않습니다.");
+			//TODO resign으로 바꾸기
 			us.removeUser(id);
 		}
 	}

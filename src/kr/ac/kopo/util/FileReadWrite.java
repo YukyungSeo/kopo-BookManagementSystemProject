@@ -10,21 +10,25 @@ import java.util.Map;
 
 public class FileReadWrite {
 
-	public static void write(String filename, Map<?, ?> map) {
+	public static boolean write(String filename, Map<?, ?> map) {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 
+		boolean bool = false;
 		try {
 			fos = new FileOutputStream("DBfiles/" + filename);
 			oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(map);
 			System.out.println("log : "+ filename +" 데이터 저장 완료");
+			bool = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			FileClose.close(oos, fos);
 		}
+		
+		return bool;
 	}
 
 	public static Object read(String filename) {

@@ -15,11 +15,11 @@ public class AccountMenuController implements MenuController {
 			selection = IO.getInt("항목을 선택하세요(1.회원가입 2.로그인 3.종료) : ");
 			switch (selection) {
 			case 1:
-				join();
+				this.signup();
 				PBU.boundaryOfWork();
 				break;
 			case 2:
-				login();
+				this.login();
 				break;
 			case 3:
 				IO.println("프로그램을 종료합니다.");
@@ -34,14 +34,9 @@ public class AccountMenuController implements MenuController {
 		
 	}
 
-	private void join() {
+	private void signup() {
 		AccountController ac = new AccountController();
-		if (ac.join())
-			IO.println("회원가입이 완료되었습니다");
-		else {
-			IO.print("오류가 발생되었습니다");
-			PBU.boundaryOfWork();
-		}
+		ac.signup();
 	}
 
 	private void login() {
@@ -49,7 +44,7 @@ public class AccountMenuController implements MenuController {
 		User user = ac.login();
 
 		if (user != null) {
-			IO.println("로그인되었습니다");
+			IO.println("로그인되었습니다.");
 			this.gotoLoginMenu(user);
 		} else {
 			PBU.boundaryOfWork();

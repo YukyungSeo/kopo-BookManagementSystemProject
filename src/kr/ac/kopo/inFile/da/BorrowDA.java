@@ -11,11 +11,12 @@ import kr.ac.kopo.util.FileReadWrite;
 public class BorrowDA implements MapDA<String, Borrow> {
 
 	private static Map<String, Borrow> BORROWMAP;
+	private final String dbFilename = "BorrowData";
 
 	@SuppressWarnings("unchecked")
 	public BorrowDA() {
 		super();
-		BorrowDA.BORROWMAP = (Map<String, Borrow>) FileReadWrite.read("borrow");
+		BorrowDA.BORROWMAP = (Map<String, Borrow>) FileReadWrite.read(dbFilename);
 	}
 
 	public Map<String, Borrow> getBORROWMAP() {
@@ -29,14 +30,14 @@ public class BorrowDA implements MapDA<String, Borrow> {
 	@Override
 	public boolean add(String k, Borrow v) {
 		boolean bool = BorrowDA.BORROWMAP.put(k, v) == null;
-		FileReadWrite.write("borrow", BorrowDA.BORROWMAP);
+		FileReadWrite.write(dbFilename, BorrowDA.BORROWMAP);
 		return bool;
 	}
 
 	@Override
 	public Borrow remove(String k) {
 		Borrow borrow = BorrowDA.BORROWMAP.remove(k);
-		FileReadWrite.write("borrow", BorrowDA.BORROWMAP);
+		FileReadWrite.write(dbFilename, BorrowDA.BORROWMAP);
 		return borrow;
 	}
 
@@ -73,4 +74,8 @@ public class BorrowDA implements MapDA<String, Borrow> {
 		return arr;
 	}
 
+	@Override
+	public void saveData() {
+		FileReadWrite.write(dbFilename, BorrowDA.BORROWMAP);
+	}
 }

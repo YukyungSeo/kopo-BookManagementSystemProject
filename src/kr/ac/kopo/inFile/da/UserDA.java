@@ -11,11 +11,12 @@ import kr.ac.kopo.util.FileReadWrite;
 public class UserDA implements MapDA<String, User> {
 
 	private static Map<String, User> USERMAP;
+	private final String dbFilename = "UserData";
 
 	@SuppressWarnings("unchecked")
 	public UserDA() {
 		super();
-		UserDA.USERMAP = (Map<String, User>) FileReadWrite.read("user");
+		UserDA.USERMAP = (Map<String, User>) FileReadWrite.read(dbFilename);
 
 		// debugging
 //		Set<Entry<String, User>> set = UserDA.USERMAP.entrySet();
@@ -30,15 +31,15 @@ public class UserDA implements MapDA<String, User> {
 
 	@Override
 	public boolean add(String k, User v) {
-		boolean bool = UserDA.USERMAP.put(k, v) == null;
-		FileReadWrite.write("user", UserDA.USERMAP);
-		return bool;
+		boolean bool1 = UserDA.USERMAP.put(k, v) == null;
+		boolean bool2 = FileReadWrite.write(dbFilename, UserDA.USERMAP);
+		return bool1 && bool2;
 	}
 
 	@Override
 	public User remove(String k) {
 		User user = UserDA.USERMAP.remove(k);
-		FileReadWrite.write("user", UserDA.USERMAP);
+		FileReadWrite.write(dbFilename, UserDA.USERMAP);
 		return user;
 	}
 
@@ -60,6 +61,11 @@ public class UserDA implements MapDA<String, User> {
 			}
 		}
 		return arr;
+	}
+
+	@Override
+	public void saveData() {
+		FileReadWrite.write(dbFilename, UserDA.USERMAP);
 	}
 
 }

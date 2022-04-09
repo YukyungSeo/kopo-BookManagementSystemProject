@@ -11,4 +11,6 @@ public interface MapDA<K, V> {
 	public V get(K k);
 
 	public ArrayList<V> getList(String value);
+
+	public void saveData();
 }

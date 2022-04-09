@@ -44,7 +44,6 @@ public class AccountMenuController implements MenuController {
 		User user = ac.login();
 
 		if (user != null) {
-			IO.println("로그인되었습니다.");
 			this.gotoLoginMenu(user);
 		} else {
 			PBU.boundaryOfWork();

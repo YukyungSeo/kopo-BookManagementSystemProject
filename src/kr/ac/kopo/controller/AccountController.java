@@ -68,6 +68,7 @@ public class AccountController implements Controller {
 	}
 
 	protected User login() {
+		
 		String id = IO.getString("아이디 : ");
 		String pwd = IO.getString("패스워드 : ");
 
@@ -76,9 +77,11 @@ public class AccountController implements Controller {
 		if (user == null) {
 			IO.println("입력하신 정보가 맞지 않습니다.");
 			return null;
+		} else {
+			IO.println("로그인되었습니다.");
+			return user;
 		}
 
-		return user;
 	}
 
 	// TODO 회원탈퇴

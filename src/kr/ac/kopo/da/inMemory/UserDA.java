@@ -1,51 +1,38 @@
-package kr.ac.kopo.inFile.da;
+package kr.ac.kopo.da.inMemory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import kr.ac.kopo.model.User;
-import kr.ac.kopo.util.FileReadWrite;
 
 public class UserDA implements MapDA<String, User> {
 
-	private static Map<String, User> USERMAP;
-	private final String dbFilename = "UserData";
+	private final static Map<String, User> USERMAP = new HashMap<>();
 
-	@SuppressWarnings("unchecked")
 	public UserDA() {
 		super();
-		UserDA.USERMAP = (Map<String, User>) FileReadWrite.read(dbFilename);
-
-		// debugging
-//		Set<Entry<String, User>> set = UserDA.USERMAP.entrySet();
-//		for (Entry<String, User> entry : set) {
-//			System.out.println(entry.getValue());
-//		}
 	}
 
 	public Map<String, User> getUSERMAP() {
-		return UserDA.USERMAP;
+		return USERMAP;
 	}
 
 	@Override
 	public boolean add(String k, User v) {
-		boolean bool1 = UserDA.USERMAP.put(k, v) == null;
-		boolean bool2 = FileReadWrite.write(dbFilename, UserDA.USERMAP);
-		return bool1 && bool2;
+		return USERMAP.put(k, v) == null;
 	}
 
 	@Override
 	public User remove(String k) {
-		User user = UserDA.USERMAP.remove(k);
-		FileReadWrite.write(dbFilename, UserDA.USERMAP);
-		return user;
+		return USERMAP.remove(k);
 	}
 
 	@Override
 	public User get(String k) {
-		return UserDA.USERMAP.get(k);
+		return USERMAP.get(k);
 	}
 
 	@Override
@@ -61,11 +48,6 @@ public class UserDA implements MapDA<String, User> {
 			}
 		}
 		return arr;
-	}
-
-	@Override
-	public void saveData() {
-		FileReadWrite.write(dbFilename, UserDA.USERMAP);
 	}
 
 }

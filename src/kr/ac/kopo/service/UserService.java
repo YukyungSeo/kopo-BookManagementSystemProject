@@ -3,8 +3,7 @@ package kr.ac.kopo.service;
 import java.util.ArrayList;
 
 import kr.ac.kopo.controller.ErrorType;
-//import kr.ac.kopo.inMemory.da.UserDA;
-import kr.ac.kopo.inFile.da.UserDA;
+import kr.ac.kopo.da.inFile.UserDA;
 import kr.ac.kopo.model.User;
 
 public class UserService {

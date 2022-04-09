@@ -1,4 +1,4 @@
-package kr.ac.kopo.inFile.da;
+package kr.ac.kopo.da.inFile;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,4 @@ public interface MapDA<K, V> {
 	public V get(K k);
 
 	public ArrayList<V> getList(String value);
-
-	public void saveData();
 }

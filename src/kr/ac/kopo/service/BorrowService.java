@@ -5,10 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import kr.ac.kopo.controller.ErrorType;
-//import kr.ac.kopo.inMemory.da.BookDA;
-//import kr.ac.kopo.inMemory.da.BorrowDA;
-import kr.ac.kopo.inFile.da.BookDA;
-import kr.ac.kopo.inFile.da.BorrowDA;
+import kr.ac.kopo.da.inFile.BookDA;
+import kr.ac.kopo.da.inFile.BorrowDA;
 import kr.ac.kopo.model.Book;
 import kr.ac.kopo.model.Borrow;
 
@@ -29,7 +27,7 @@ public class BorrowService {
 
 		Book book = bookda.get(isbn);
 		book.setBorrow(true);
-		bookda.saveData();
+		bookda.add(book.getIsbn(), book);
 
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -52,7 +50,7 @@ public class BorrowService {
 
 		Book book = bookda.get(isbn);
 		book.setBorrow(false);
-		bookda.saveData();
+		bookda.add(book.getIsbn(), book);
 
 		return bda.remove(isbn) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}

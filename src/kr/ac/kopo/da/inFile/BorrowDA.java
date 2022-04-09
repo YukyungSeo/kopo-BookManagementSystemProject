@@ -1,4 +1,4 @@
-package kr.ac.kopo.inFile.da;
+package kr.ac.kopo.da.inFile;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -72,10 +72,5 @@ public class BorrowDA implements MapDA<String, Borrow> {
 			}
 		}
 		return arr;
-	}
-
-	@Override
-	public void saveData() {
-		FileReadWrite.write(dbFilename, BorrowDA.BORROWMAP);
 	}
 }

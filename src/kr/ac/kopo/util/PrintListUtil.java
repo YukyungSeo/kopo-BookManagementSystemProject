@@ -26,11 +26,11 @@ public class PrintListUtil {
 
 		su.println("< 회원 목록 >");
 		su.println("--------------------------------------------------------------------------------------------");
-		su.println("\t아이디\t패스워드\t이름\t생년월일\t\te-mail\t\t\t전화번호");
+		su.println("\t아이디\t패스워드\t이름\t생년월일\t\t전화번호\t\te-mail");
 		for (User user : list) {
 			su.println("--------------------------------------------------------------------------------------------");
 			su.println(String.format("\t%s\t%s\t%s\t%s\t%s\t%s", user.getId(), user.getPassword(), user.getName(),
-					user.getBirth(), user.getEmail(), user.getPhoneNumber()));
+					user.getBirth(), user.getPhoneNumber(), user.getEmail()));
 		}
 		su.println("--------------------------------------------------------------------------------------------");
 
@@ -40,10 +40,10 @@ public class PrintListUtil {
 
 		su.println("< 회원 정보 >");
 		su.println("--------------------------------------------------------------------------------------------");
-		su.println("\t아이디\t패스워드\t이름\t생년월일\t\te-mail\t\t\t전화번호");
+		su.println("\t아이디\t패스워드\t이름\t생년월일\t\t전화번호\t\te-mail");
 		su.println("--------------------------------------------------------------------------------------------");
 		su.println(String.format("\t%s\t%s\t%s\t%s\t%s\t%s", user.getId(), user.getPassword(), user.getName(),
-				user.getBirth(), user.getEmail(), user.getPhoneNumber()));
+				user.getBirth(), user.getPhoneNumber(), user.getEmail()));
 		su.println("--------------------------------------------------------------------------------------------");
 
 	}
@@ -52,11 +52,10 @@ public class PrintListUtil {
 
 		su.println("< 도서 목록 >");
 		su.println("--------------------------------------------------------------------------------------------");
-		su.println("\tISBN\t제목\t\t지은이\t출판사\t\t대여여부");
-		// TODO:String.format으로 열간격 맟추기
+		su.println("\tISBN\t제목\t\t\t지은이\t\t\t출판사\t\t대여여부");
 		for (Book book : list) {
 			su.println("--------------------------------------------------------------------------------------------");
-			su.println(String.format("\t%s\t%s\t%s\t%s\t%s", book.getIsbn(), book.getTitle(), book.getAuthor(),
+			su.println(String.format("\t%s\t%-20s\t%-15s\t%-10s\t%s", book.getIsbn(), book.getTitle(), book.getAuthor(),
 					book.getPublisher(), book.isBorrow() ? "대여 중" : "대여 가능"));
 		}
 		su.println("--------------------------------------------------------------------------------------------");
@@ -71,7 +70,7 @@ public class PrintListUtil {
 
 		su.println("< 대여 목록 >");
 		su.println("--------------------------------------------------------------------------------------------");
-		su.println("\tISBN\t도서제목\t대여자ID\t대여일\t반납일\t");
+		su.println("\tISBN\t도서제목\t\t\t대여자ID\t대여일\t반납일");
 		// TODO:String.format으로 열간격 맟추기
 		for (Borrow borrow : list) {
 			bc.setTime(borrow.getBorrowDate());

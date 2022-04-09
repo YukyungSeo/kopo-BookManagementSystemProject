@@ -36,7 +36,7 @@ public class BookService {
 	public ErrorType removeBook(String isbn) {
 		// 해당 isbn이 없을 경우 삭제 실패
 		if (!this.containISBN(isbn))
-			return ErrorType.NOEXIST;
+			return ErrorType.NOTEXIST;
 
 		// 해당 isbn을 가진 도서가 대여중일 경우 삭제 실패
 		BorrowService bs = new BorrowService();

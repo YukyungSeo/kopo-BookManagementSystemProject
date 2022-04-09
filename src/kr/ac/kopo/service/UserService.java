@@ -52,7 +52,7 @@ public class UserService {
 
 	public ErrorType removeUser(String id) {
 		if(!this.containID(id))
-			return ErrorType.NOEXIST;
+			return ErrorType.NOTEXIST;
 		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;		
 	}
 

@@ -89,7 +89,7 @@ public class AccountController implements Controller {
 		ErrorType et = us.removeUser(user);
 
 		switch (et) {
-		case NOEXIST:
+		case NOTEXIST:
 			IO.println("해당 회원이 존재하지 않습니다.");
 			return false;
 		case FAIL:

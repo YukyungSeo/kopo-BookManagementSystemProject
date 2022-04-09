@@ -20,7 +20,7 @@ public class BorrowService {
 	public ErrorType borrowBook(String isbn, String userId) {
 
 		if (!bookda.containISBN(isbn)) { // 해당 ISBN이 없어면 false
-			return ErrorType.NOEXIST;
+			return ErrorType.NOTEXIST;
 		}
 
 		if (bda.containISBN(isbn)) { // 대여 중이면 false
@@ -42,12 +42,12 @@ public class BorrowService {
 	public ErrorType returnBook(String isbn, String userId) {
 
 		if (!bda.containISBN(isbn)) {
-			return ErrorType.NOEXIST;
+			return ErrorType.NOTEXIST;
 		}
 
 		Borrow borrow = bda.get(isbn);
 		if (!borrow.getUserId().equals(userId)) {
-			return ErrorType.NOEXIST;
+			return ErrorType.NOTEXIST;
 		}
 
 		Book book = bookda.get(isbn);

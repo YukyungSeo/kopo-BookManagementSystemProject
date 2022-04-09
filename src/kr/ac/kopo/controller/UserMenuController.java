@@ -85,7 +85,7 @@ public class UserMenuController implements MenuController {
 		ErrorType et = bs.borrowBook(isbn, this.user.getId());
 
 		switch (et) {
-		case NOEXIST:
+		case NOTEXIST:
 			IO.println("해당 ISBN을 가진 도서는 존재하지않습니다. ISBN을 확인해주세요.");
 			break;
 		case BORROWED:
@@ -110,7 +110,7 @@ public class UserMenuController implements MenuController {
 		String isbn = IO.getString("도서 ISBN : ");
 		ErrorType et = bs.returnBook(isbn, this.user.getId());
 		switch (et) {
-		case NOEXIST:
+		case NOTEXIST:
 			IO.println("해당 ISBN을 가진 도서를 대여하지 않았습니다. ISBN을 확인해주세요.");
 			break;
 		case FAIL:

@@ -50,7 +50,7 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 			ErrorType et = us.removeUser(id);
 
 			switch (et) {
-			case NOEXIST :
+			case NOTEXIST :
 				IO.println("해당 아이디가 존재하지 않습니다.");
 				break;
 			case FAIL:

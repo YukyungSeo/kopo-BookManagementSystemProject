@@ -89,7 +89,7 @@ public class BookManagementMenuContorller implements MenuController {
 			ErrorType et = bs.removeBook(isbn);
 
 			switch (et) {
-			case NOEXIST:
+			case NOTEXIST:
 				IO.println("해당 ISBN을 가진 도서는 존재하지 않습니다.");
 				break;
 			case BORROWED:

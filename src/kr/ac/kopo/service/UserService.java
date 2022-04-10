@@ -2,6 +2,7 @@ package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
+//import kr.ac.kopo.da.inMemory.UserDA;
 import kr.ac.kopo.da.inFile.UserDA;
 import kr.ac.kopo.model.User;
 import kr.ac.kopo.type.ErrorType;
@@ -9,20 +10,6 @@ import kr.ac.kopo.type.ErrorType;
 public class UserService {
 
 	private UserDA uda = new UserDA();
-
-	public ErrorType checkId(String id) {
-		if (id.equals(""))
-			return ErrorType.OUTOFFORM;
-
-		else if (containID(id))
-			return ErrorType.EXIST;
-
-		return ErrorType.SUCCESS;
-	}
-
-	public boolean containID(String id) {
-		return this.getUser(id) != null;
-	}
 
 	public boolean isUser(String id, String pwd) {
 		User user = this.getUser(id);
@@ -49,11 +36,29 @@ public class UserService {
 		return uda.add(user.getId(), user) ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
+	public ErrorType loginCheckId(String newId) {
+		if (newId.equals(""))
+			return ErrorType.OUTOFFORM;
+
+		else if (containID(newId))
+			return ErrorType.EXIST;
+
+		return ErrorType.SUCCESS;
+	}
+
+	public boolean containID(String id) {
+		return this.getUser(id) != null;
+	}
+
 	public ErrorType addUser(User newUser, String pwd2) {
 		if (!newUser.getPassword().equals(pwd2)) {
 			return ErrorType.NOTEQUALPWD;
 		}
-		return uda.add(newUser.getId(), newUser) ? ErrorType.SUCCESS : ErrorType.FAIL;
+		return this.addUser(newUser);
+	}
+
+	public ErrorType addUser(User e) {
+		return uda.add(e.getId(), e) ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
 	public ErrorType removeUser(User e) {
@@ -63,15 +68,15 @@ public class UserService {
 	public ErrorType removeUser(String id) {
 		if (!this.containID(id))
 			return ErrorType.NOTEXIST;
-		
+
 		BorrowService bs = new BorrowService();
-		if(bs.searchBorrowWithID(id).size() != 0)
+		if (bs.searchBorrowWithID(id).size() != 0)
 			return ErrorType.BORROWED;
-		
+
 		return uda.remove(id) != null ? ErrorType.SUCCESS : ErrorType.FAIL;
 	}
 
-	private User getUser(String id) {
+	public User getUser(String id) {
 		return uda.get(id);
 	}
 

@@ -54,6 +54,9 @@ public class UserManagementMenuContorller extends AccountMenuController implemen
 			case NOTEXIST :
 				IO.println("해당 아이디가 존재하지 않습니다.");
 				break;
+			case BORROWED :
+				IO.println("해당 회원은 대여 중인 도서가 있습니다. 회원삭제에 실패하였습니다.");
+				break;
 			case FAIL:
 				IO.println("회원삭제에 실패하였습니다.");
 			case SUCCESS:

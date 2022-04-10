@@ -50,7 +50,7 @@ public class AccountController implements Controller {
 		String id = null;
 		loop: while (true) {
 			id = IO.getString("아이디 : ");
-			ErrorType et = us.checkId(id);
+			ErrorType et = us.loginCheckId(id);
 
 			switch (et) {
 			case OUTOFFORM:

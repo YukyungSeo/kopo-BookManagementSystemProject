@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import kr.ac.kopo.da.MapDA;
 import kr.ac.kopo.model.User;
 
 public class UserDA implements MapDA<String, User> {

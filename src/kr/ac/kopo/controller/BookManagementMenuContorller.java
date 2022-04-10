@@ -67,7 +67,7 @@ public class BookManagementMenuContorller implements MenuController {
 		String isbn = null;
 		loop: while (true) {
 			isbn = IO.getString("ISBN : ");
-			ErrorType et = bs.checkISBN(isbn);
+			ErrorType et = bs.addBookCheckISBN(isbn);
 
 			switch (et) {
 			case OUTOFFORM:

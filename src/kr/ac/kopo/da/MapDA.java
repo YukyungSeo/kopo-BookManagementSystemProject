@@ -1,4 +1,4 @@
-package kr.ac.kopo.da.inMemory;
+package kr.ac.kopo.da;
 
 import java.util.ArrayList;
 

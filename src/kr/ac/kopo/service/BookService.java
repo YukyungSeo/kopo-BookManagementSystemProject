@@ -2,6 +2,7 @@ package kr.ac.kopo.service;
 
 import java.util.ArrayList;
 
+//import kr.ac.kopo.da.inMemory.BookDA;
 import kr.ac.kopo.da.inFile.BookDA;
 import kr.ac.kopo.model.Book;
 import kr.ac.kopo.type.ErrorType;
@@ -14,7 +15,7 @@ public class BookService {
 		super();
 	}
 
-	public ErrorType checkISBN(String isbn) {
+	public ErrorType addBookCheckISBN(String isbn) {
 		if (isbn.equals(""))
 			return ErrorType.OUTOFFORM;
 		return this.containISBN(isbn) ? ErrorType.EXIST : ErrorType.SUCCESS;
